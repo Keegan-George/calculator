@@ -1,5 +1,8 @@
 initalizeInputButtons();
-
+let operator;
+let num1;
+let num2;
+let result = 0;
 
 function add(a, b) {
     return a + b;
@@ -45,6 +48,7 @@ function initalizeInputButtons() {
     });
 
     clearButton.addEventListener("click", () => {
-        display.innerText = "0";
+        result = 0;
+        display.innerText = result;
     })
 }
