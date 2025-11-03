@@ -35,10 +35,10 @@ function operate(operator, num1, num2) {
 
 function initalizeInputButtons() {
     const display = document.querySelector(".display");
-    const buttons = document.querySelectorAll(".input-button")
-    const clearButton = document.querySelector("#CE")
+    const digitButtons = document.querySelectorAll(".digit-button")
+    const clearButton = document.querySelector(".clear-button")
 
-    buttons.forEach(button => {
+    digitButtons.forEach(button => {
         button.addEventListener("click", event => {
             display.innerText += event.target.innerText; 
         });
