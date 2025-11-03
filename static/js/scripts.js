@@ -36,10 +36,15 @@ function operate(operator, num1, num2) {
 function initalizeInputButtons() {
     const display = document.querySelector(".display");
     const buttons = document.querySelectorAll(".input-button")
+    const clearButton = document.querySelector("#CE")
 
     buttons.forEach(button => {
         button.addEventListener("click", event => {
-            display.innerText = event.target.innerText; 
+            display.innerText += event.target.innerText; 
         });
     });
+
+    clearButton.addEventListener("click", () => {
+        display.innerText = "0";
+    })
 }
