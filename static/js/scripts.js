@@ -38,8 +38,9 @@ function operate(operator, num1, num2) {
 
 function initalizeInputButtons() {
     const display = document.querySelector(".display");
-    const digitButtons = document.querySelectorAll(".digit-button")
-    const clearButton = document.querySelector(".clear-button")
+    const digitButtons = document.querySelectorAll(".digit-button");
+    const clearButton = document.querySelector(".clear-button");
+    const operatorButtons = document.querySelectorAll(".operator-button");
 
     digitButtons.forEach(button => {
         button.addEventListener("click", event => {
@@ -50,5 +51,13 @@ function initalizeInputButtons() {
     clearButton.addEventListener("click", () => {
         result = 0;
         display.innerText = result;
-    })
+    });
+
+    operatorButtons.forEach(button => {
+        button.addEventListener("click", event => {
+            operator = event.target.innerText;
+
+        });
+    });
+
 }
