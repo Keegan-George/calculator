@@ -46,9 +46,14 @@ function initalizeInputButtons() {
         button.addEventListener("click", event => {
             let digit = event.target.innerText;
 
-            num1 === "0" ? num1 = digit : num1 += digit;
-           
-            display.innerText = num1;
+            if (operator) {
+                num2 === "0" ? num2 = digit : num2 += digit;
+                display.innerText = num2;
+            }
+            else {
+                num1 === "0" ? num1 = digit : num1 += digit;
+                display.innerText = num1;
+            }
         });
     });
 
