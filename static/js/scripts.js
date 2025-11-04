@@ -51,7 +51,7 @@ function initalizeInputButtons() {
     });
 
     clearButton.addEventListener("click", () => {
-        result = 0;
+        num1 = num2 = result = 0;
         display.innerText = result;
     });
 
