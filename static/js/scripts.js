@@ -58,7 +58,12 @@ function initalizeInputButtons() {
     operatorButtons.forEach(button => {
         button.addEventListener("click", event => {
             operator = event.target.innerText;
-
         });
     });
+
+    equalButton.addEventListener("click", () => {
+        if(num1 && num2 && operator){
+            result = operator(operator, num1, num2)
+        }
+    })
 }
