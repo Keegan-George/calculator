@@ -1,8 +1,7 @@
 initalizeInputButtons();
 let operator = "";
-let num1;
-let num2;
-let result = 0;
+let num1, num2, result;
+num1 = num2 = result = 0;
 
 function add(a, b) {
     return a + b;
