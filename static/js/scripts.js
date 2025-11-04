@@ -27,7 +27,7 @@ function operate(operator, num1, num2) {
         case "-":
             return subtract(num1, num2);
 
-        case "*":
+        case "x":
             return multiply(num1, num2);
 
         case "/":
@@ -67,13 +67,12 @@ function initalizeInputButtons() {
         button.addEventListener("click", event => {
             operator = event.target.innerText;
         });
-
-
     });
 
     equalButton.addEventListener("click", () => {
         if (num1 && num2 && operator) {
-            result = operator(operator, num1, num2)
-        }
+            result = operate(operator, +num1, +num2)
+            display.innerText = result;
+        }   
     })
 }
