@@ -1,5 +1,5 @@
 initalizeInputButtons();
-let operator;
+let operator = "";
 let num1;
 let num2;
 let result = 0;
@@ -52,6 +52,7 @@ function initalizeInputButtons() {
 
     clearButton.addEventListener("click", () => {
         num1 = num2 = result = 0;
+        operator = ""
         display.innerText = result;
     });
 
@@ -62,7 +63,7 @@ function initalizeInputButtons() {
     });
 
     equalButton.addEventListener("click", () => {
-        if(num1 && num2 && operator){
+        if (num1 && num2 && operator) {
             result = operator(operator, num1, num2)
         }
     })
