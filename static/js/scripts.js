@@ -41,10 +41,12 @@ function initalizeInputButtons() {
     const digitButtons = document.querySelectorAll(".digit-button");
     const clearButton = document.querySelector(".clear-button");
     const operatorButtons = document.querySelectorAll(".operator-button");
+    const equalButton = document.querySelector(".equal-button");
 
     digitButtons.forEach(button => {
         button.addEventListener("click", event => {
-            display.innerText += event.target.innerText; 
+            let digit = event.target.innerText;
+            display.innerText === "0" ? display.innerText = digit : display.innerText += digit;
         });
     });
 
@@ -59,5 +61,4 @@ function initalizeInputButtons() {
 
         });
     });
-
 }
