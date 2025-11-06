@@ -65,6 +65,14 @@ function initalizeInputButtons() {
 
     operatorButtons.forEach(button => {
         button.addEventListener("click", event => {
+            if (operator) {
+                result = operate(operator, +num1, +num2);
+                display.innerText = result;
+
+                num1 = result;
+                num2 = "0";
+            }
+
             operator = event.target.innerText;
         });
     });
@@ -76,6 +84,7 @@ function initalizeInputButtons() {
 
             num1 = result;
             num2 = "0";
-        }   
+            operator = "";
+        }
     })
 }
