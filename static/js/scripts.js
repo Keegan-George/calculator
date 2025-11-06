@@ -71,8 +71,11 @@ function initalizeInputButtons() {
 
     equalButton.addEventListener("click", () => {
         if (num1 && num2 && operator) {
-            result = operate(operator, +num1, +num2)
+            result = operate(operator, +num1, +num2);
             display.innerText = result;
+
+            num1 = result;
+            num2 = "0";
         }   
     })
 }
