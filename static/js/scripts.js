@@ -36,7 +36,6 @@ function operate(operator, num1, num2) {
 }
 
 function initalizeInputButtons() {
-    const display = document.querySelector(".display");
     const digitButtons = document.querySelectorAll(".digit-button");
     const clearButton = document.querySelector(".clear-button");
     const operatorButtons = document.querySelectorAll(".operator-button");
@@ -48,11 +47,11 @@ function initalizeInputButtons() {
 
             if (operator) {
                 num2 === "0" ? num2 = digit : num2 += digit;
-                display.innerText = num2;
+                updateDisplay(num2)
             }
             else {
                 num1 === "0" ? num1 = digit : num1 += digit;
-                display.innerText = num1;
+                updateDisplay(num1);
             }
         });
     });
@@ -60,14 +59,14 @@ function initalizeInputButtons() {
     clearButton.addEventListener("click", () => {
         num1 = num2 = result = "0";
         operator = ""
-        display.innerText = result;
+        updateDisplay(result);
     });
 
     operatorButtons.forEach(button => {
         button.addEventListener("click", event => {
             if (operator) {
                 result = operate(operator, +num1, +num2);
-                display.innerText = result;
+                updateDisplay(result);
 
                 num1 = result;
                 num2 = "0";
@@ -80,11 +79,16 @@ function initalizeInputButtons() {
     equalButton.addEventListener("click", () => {
         if (num1 && num2 && operator) {
             result = operate(operator, +num1, +num2);
-            display.innerText = result;
+            updateDisplay(result);
 
             num1 = result;
             num2 = "0";
             operator = "";
         }
     })
+}
+
+function updateDisplay(str) {
+    const display = document.querySelector(".display");
+    display.innerText = str;
 }
