@@ -36,10 +36,10 @@ function operate(operator, num1, num2) {
 }
 
 function initalizeInputButtons() {
-    const digitButtons = document.querySelectorAll(".digit-button");
     const clearButton = document.querySelector(".clear-button");
-    const operatorButtons = document.querySelectorAll(".operator-button");
     const equalButton = document.querySelector(".equal-button");
+    const digitButtons = document.querySelectorAll(".digit-button");
+    const operatorButtons = document.querySelectorAll(".operator-button");
 
     digitButtons.forEach(button => {
         button.addEventListener("click", event => {
@@ -95,8 +95,5 @@ function updateDisplay(str) {
 
 function round(number, precision = 11) {
     const decimalPlaces = 10 ** precision;
-
     return Math.round(number * decimalPlaces) / decimalPlaces;
 }
-
-
