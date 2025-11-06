@@ -66,10 +66,18 @@ function initalizeInputButtons() {
         button.addEventListener("click", event => {
             if (operator) {
                 result = operate(operator, +num1, +num2);
-                updateDisplay(result);
 
-                num1 = result;
-                num2 = "0";
+                if(isNaN(result) || !isFinite(result)){
+                    num1 = num2 = result = "0";
+                    operator = "";
+                    updateDisplay("Srsly? Divsion by 0?");
+                }
+
+                else{
+                    updateDisplay(result);
+                    num1 = result;
+                    num2 = "0";
+                }
             }
 
             operator = event.target.innerText;
@@ -79,11 +87,19 @@ function initalizeInputButtons() {
     equalButton.addEventListener("click", () => {
         if (num1 && num2 && operator) {
             result = operate(operator, +num1, +num2);
-            updateDisplay(result);
 
-            num1 = result;
-            num2 = "0";
-            operator = "";
+            if(isNaN(result) || !isFinite(result)){
+                num1 = num2 = result = "0";
+                operator = "";
+                updateDisplay("Srsly? Divsion by 0?");
+            }
+
+            else{
+                updateDisplay(result);
+                num1 = result;
+                num2 = "0";
+                operator = "";
+            }
         }
     })
 }
