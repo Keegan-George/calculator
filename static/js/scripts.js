@@ -2,6 +2,7 @@ initalizeInputButtons();
 let operator = "";
 let num1, num2, result;
 num1 = num2 = result = "0";
+equalsButtonPressed = false;
 
 function add(a, b) {
     return a + b;
@@ -45,6 +46,12 @@ function initalizeInputButtons() {
         button.addEventListener("click", event => {
             let digit = event.target.innerText;
 
+            if (equalsButtonPressed){
+                equalsButtonPressed = false;
+                num1 = num2 = result = "0";
+                operator = ""
+            }
+
             if (operator) {
                 num2 === "0" ? num2 = digit : num2 += digit;
                 updateDisplay(num2)
@@ -64,6 +71,10 @@ function initalizeInputButtons() {
 
     operatorButtons.forEach(button => {
         button.addEventListener("click", event => {
+            if (equalsButtonPressed){
+                equalsButtonPressed = false;
+            }
+
             if (operator) {
                 result = operate(operator, +num1, +num2);
 
@@ -99,6 +110,7 @@ function initalizeInputButtons() {
                 num1 = result;
                 num2 = "0";
                 operator = "";
+                equalsButtonPressed = true;
             }
         }
     })
