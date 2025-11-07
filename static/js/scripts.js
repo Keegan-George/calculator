@@ -54,11 +54,11 @@ function initalizeInputButtons() {
 
             if (operator) {
                 num2 === "0" ? num2 = digit : num2 += digit;
-                updateDisplay(num2)
+                updateScreen(num2)
             }
             else {
                 num1 === "0" ? num1 = digit : num1 += digit;
-                updateDisplay(num1);
+                updateScreen(num1);
             }
         });
     });
@@ -66,7 +66,7 @@ function initalizeInputButtons() {
     clearButton.addEventListener("click", () => {
         num1 = num2 = result = "0";
         operator = ""
-        updateDisplay(result);
+        updateScreen(result);
     });
 
     operatorButtons.forEach(button => {
@@ -81,11 +81,11 @@ function initalizeInputButtons() {
                 if(isNaN(result) || !isFinite(result)){
                     num1 = num2 = result = "0";
                     operator = "";
-                    updateDisplay("Srsly? Divsion by 0?");
+                    updateScreen("Srsly? Divsion by 0?");
                 }
 
                 else{
-                    updateDisplay(result);
+                    updateScreen(result);
                     num1 = result;
                     num2 = "0";
                 }
@@ -102,11 +102,11 @@ function initalizeInputButtons() {
             if(isNaN(result) || !isFinite(result)){
                 num1 = num2 = result = "0";
                 operator = "";
-                updateDisplay("Srsly? Divsion by 0?");
+                updateScreen("Srsly? Divsion by 0?");
             }
 
             else{
-                updateDisplay(result);
+                updateScreen(result);
                 num1 = result;
                 num2 = "0";
                 operator = "";
@@ -116,9 +116,9 @@ function initalizeInputButtons() {
     })
 }
 
-function updateDisplay(str) {
-    const display = document.querySelector(".display");
-    display.innerText = str;
+function updateScreen(str) {
+    const screen = document.querySelector(".screen");
+    screen.innerText = str;
 }
 
 function round(number, precision = 11) {
