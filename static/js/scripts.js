@@ -40,7 +40,7 @@ function operate(operator, num1, num2) {
 function initalizeInputButtons() {
     const clearButton = document.querySelector(".clear-button");
     const equalButton = document.querySelector(".equal-button");
-    const digitButtons = document.querySelectorAll(".digit-button");
+    const digitButtons = document.querySelectorAll(".input-button");
     const operatorButtons = document.querySelectorAll(".operator-button");
 
     digitButtons.forEach(button => {
@@ -114,7 +114,7 @@ function initalizeInputButtons() {
                 equalsButtonPressed = true;
             }
         }
-    })
+    });
 }
 
 function updateScreen(str) {
