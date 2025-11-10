@@ -33,12 +33,15 @@ body {
     background-color: #4C585B;
 }
 
+
 .screen {
     border: 3px solid black;
-    padding: 3em;
+    padding: 0.75em;
     border-radius: 10px;
     background-color: #A5BFCC;
     margin-bottom: 5px;
+    font-weight: 900;
+    font-size: 50px;
 }
 
 .buttons {
@@ -54,10 +57,10 @@ body {
 button {
     flex: 1;
     padding: 2em;
-    font-weight: 900;
-    font-size: 20px;
     border-radius: 10px;
     background-color: #7E99A3;
+    font-weight: 900;
+    font-size: 20px;
 }
 
 button:hover {
