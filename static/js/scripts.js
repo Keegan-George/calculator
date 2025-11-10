@@ -3,6 +3,7 @@ let operator = "";
 let num1, num2, result;
 num1 = num2 = result = "0";
 equalsButtonPressed = false;
+error_message = "E R R O R";
 
 function add(a, b) {
     return a + b;
@@ -46,7 +47,7 @@ function initalizeInputButtons() {
         button.addEventListener("click", event => {
             let digit = event.target.innerText;
 
-            if (equalsButtonPressed){
+            if (equalsButtonPressed) {
                 equalsButtonPressed = false;
                 num1 = num2 = result = "0";
                 operator = ""
@@ -71,20 +72,20 @@ function initalizeInputButtons() {
 
     operatorButtons.forEach(button => {
         button.addEventListener("click", event => {
-            if (equalsButtonPressed){
+            if (equalsButtonPressed) {
                 equalsButtonPressed = false;
             }
 
             if (operator) {
                 result = operate(operator, +num1, +num2);
 
-                if(isNaN(result) || !isFinite(result)){
+                if (isNumberIsFinite(result)) {
                     num1 = num2 = result = "0";
                     operator = "";
-                    updateScreen("Srsly? Divsion by 0?");
+                    updateScreen(error_message);
                 }
 
-                else{
+                else {
                     updateScreen(result);
                     num1 = result;
                     num2 = "0";
@@ -99,13 +100,13 @@ function initalizeInputButtons() {
         if (num1 && num2 && operator) {
             result = operate(operator, +num1, +num2);
 
-            if(isNaN(result) || !isFinite(result)){
+            if (isNumberIsFinite(result)) {
                 num1 = num2 = result = "0";
                 operator = "";
-                updateScreen("Srsly? Divsion by 0?");
+                updateScreen(error_message);
             }
 
-            else{
+            else {
                 updateScreen(result);
                 num1 = result;
                 num2 = "0";
@@ -124,4 +125,8 @@ function updateScreen(str) {
 function round(number, precision = 11) {
     const decimalPlaces = 10 ** precision;
     return Math.round(number * decimalPlaces) / decimalPlaces;
+}
+
+function isNumberIsFinite(num) {
+    return isNaN(result) || !isFinite(result)
 }
