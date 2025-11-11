@@ -77,7 +77,7 @@ function initalizeInputButtons() {
             if (operator) {
                 result = operate(operator, +num1, +num2);
 
-                if (isNumberIsFinite(result)) {
+                if (isValidNumber(result)) {
                     clear();
                     updateScreen(error_message);
                 }
@@ -97,7 +97,7 @@ function initalizeInputButtons() {
         if (num1 && num2 && operator) {
             result = operate(operator, +num1, +num2);
 
-            if (isNumberIsFinite(result)) {
+            if (isValidNumber(result)) {
                 clear();
                 updateScreen(error_message);
             }
@@ -128,6 +128,6 @@ function clear() {
     operator = ""
 }
 
-function isNumberIsFinite(num) {
+function isValidNumber(num) {
     return isNaN(result) || !isFinite(result)
 }
