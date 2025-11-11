@@ -1,13 +1,13 @@
 initalizeInputButtons();
+
 let operator = "";
-let num1, num2, result;
-num1 = num2 = result = "0";
-equalsButtonPressed = false;
-error_message = "E R R O R";
-
-
+let result = "0";
 let current = "0";
 let expression = [];
+error_message = "E R R O R";
+
+equalsButtonPressed = false;
+
 
 function add(a, b) {
     return a + b;
@@ -102,7 +102,7 @@ function round(number, precision = 11) {
 }
 
 function clear() {
-    num1 = num2 = result = current = "0";
+    result = current = "0";
     expression = [];
     operator = ""
 }
@@ -120,8 +120,4 @@ function isValidExpression(expression) {
 function evaluateExpression(expression) {
     [num1, operator, num2] = expression;
     return operate(operator, +num1, +num2);
-}
-
-function isInvalidNumber(num) {
-    return isNaN(result) || !isFinite(result)
 }
