@@ -4,9 +4,9 @@ let operator = "";
 let result = "0";
 let current = "0";
 let expression = [];
-error_message = "E R R O R";
+const error_message = "E R R O R";
 
-equalsButtonPressed = false;
+let isEqualsPressed = false;
 
 
 function add(a, b) {
@@ -49,6 +49,11 @@ function initalizeInputButtons() {
 
     digitButtons.forEach(button => {
         button.addEventListener("click", event => {
+            if (isEqualsPressed){
+                clear();
+                isEqualsPressed = false;
+            }
+
             let digit = event.target.innerText;
 
             current === "0" ? current = digit : current += digit;
@@ -63,6 +68,10 @@ function initalizeInputButtons() {
 
     operatorButtons.forEach(button => {
         button.addEventListener("click", event => {
+            if (isEqualsPressed){
+                isEqualsPressed = false;
+            }
+
             expression.push(current);
 
             if (isValidExpression(expression)) {
@@ -87,6 +96,7 @@ function initalizeInputButtons() {
             current = result;
             expression = [];
             updateScreen(result);
+            isEqualsPressed = true;
         }
     });
 }
@@ -102,9 +112,9 @@ function round(number, precision = 11) {
 }
 
 function clear() {
-    result = current = "0";
+    operator = "";
     expression = [];
-    operator = ""
+    result = current = "0";  
 }
 
 function isValidExpression(expression) {
@@ -120,4 +130,8 @@ function isValidExpression(expression) {
 function evaluateExpression(expression) {
     [num1, operator, num2] = expression;
     return operate(operator, +num1, +num2);
+}
+
+function isInvalidNumber(num) {
+    return isNaN(result) || !isFinite(result)
 }
