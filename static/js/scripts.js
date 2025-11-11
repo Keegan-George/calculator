@@ -49,8 +49,7 @@ function initalizeInputButtons() {
 
             if (equalsButtonPressed) {
                 equalsButtonPressed = false;
-                num1 = num2 = result = "0";
-                operator = ""
+                clear();
             }
 
             if (operator) {
@@ -65,8 +64,7 @@ function initalizeInputButtons() {
     });
 
     clearButton.addEventListener("click", () => {
-        num1 = num2 = result = "0";
-        operator = ""
+        clear()
         updateScreen(result);
     });
 
@@ -80,8 +78,7 @@ function initalizeInputButtons() {
                 result = operate(operator, +num1, +num2);
 
                 if (isNumberIsFinite(result)) {
-                    num1 = num2 = result = "0";
-                    operator = "";
+                    clear();
                     updateScreen(error_message);
                 }
 
@@ -101,8 +98,7 @@ function initalizeInputButtons() {
             result = operate(operator, +num1, +num2);
 
             if (isNumberIsFinite(result)) {
-                num1 = num2 = result = "0";
-                operator = "";
+                clear();
                 updateScreen(error_message);
             }
 
@@ -125,6 +121,11 @@ function updateScreen(str) {
 function round(number, precision = 11) {
     const decimalPlaces = 10 ** precision;
     return Math.round(number * decimalPlaces) / decimalPlaces;
+}
+
+function clear() {
+    num1 = num2 = result = "0";
+    operator = ""
 }
 
 function isNumberIsFinite(num) {
