@@ -5,6 +5,10 @@ num1 = num2 = result = "0";
 equalsButtonPressed = false;
 error_message = "E R R O R";
 
+
+let current = "0";
+let expression = [];
+
 function add(a, b) {
     return a + b;
 }
@@ -47,68 +51,38 @@ function initalizeInputButtons() {
         button.addEventListener("click", event => {
             let digit = event.target.innerText;
 
-            if (equalsButtonPressed) {
-                equalsButtonPressed = false;
-                clear();
-            }
-
-            if (operator) {
-                num2 === "0" ? num2 = digit : num2 += digit;
-                updateScreen(num2)
-            }
-            else {
-                num1 === "0" ? num1 = digit : num1 += digit;
-                updateScreen(num1);
-            }
+            current === "0" ? current = digit : current += digit;
+            updateScreen(current);
         });
     });
 
     clearButton.addEventListener("click", () => {
-        clear()
+        clear();
         updateScreen(result);
     });
 
     operatorButtons.forEach(button => {
         button.addEventListener("click", event => {
-            if (equalsButtonPressed) {
-                equalsButtonPressed = false;
-            }
+            expression.push(current);
 
-            if (operator) {
-                result = operate(operator, +num1, +num2);
-
-                if (isValidNumber(result)) {
-                    clear();
-                    updateScreen(error_message);
-                }
-
-                else {
-                    updateScreen(result);
-                    num1 = result;
-                    num2 = "0";
-                }
+            if (isValidExpression(expression)) {
+                result = evaluateExpression(expression);
+                expression = [];
+                current = result;
+                expression.push(current);
+                updateScreen(result);
             }
 
             operator = event.target.innerText;
+            expression.push(operator);
+            current = "0";
         });
     });
 
     equalButton.addEventListener("click", () => {
-        if (num1 && num2 && operator) {
-            result = operate(operator, +num1, +num2);
-
-            if (isValidNumber(result)) {
-                clear();
-                updateScreen(error_message);
-            }
-
-            else {
-                updateScreen(result);
-                num1 = result;
-                num2 = "0";
-                operator = "";
-                equalsButtonPressed = true;
-            }
+        if (isValidExpression(expression)) {
+            result = evaluateExpression(expression);
+            expression = [];
         }
     });
 }
@@ -124,10 +98,26 @@ function round(number, precision = 11) {
 }
 
 function clear() {
-    num1 = num2 = result = "0";
+    num1 = num2 = result = current = "0";
+    expression = [];
     operator = ""
 }
 
-function isValidNumber(num) {
+function isValidExpression(expression) {
+    [num1, operator, num2] = expression;
+
+    if (!isNaN(num1) && !isNaN(num2) && operator) {
+        return true;
+    }
+
+    return false;
+}
+
+function evaluateExpression(expression) {
+    [num1, operator, num2] = expression;
+    return operate(operator, +num1, +num2);
+}
+
+function isInvalidNumber(num) {
     return isNaN(result) || !isFinite(result)
 }
