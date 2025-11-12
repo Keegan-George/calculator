@@ -89,14 +89,17 @@ function initalizeInputButtons() {
     });
 
     equalButton.addEventListener("click", () => {
-        expression.push(current);
+        if (expression.length == 2){
 
-        if (isValidExpression(expression)) {
-            result = evaluateExpression(expression);
-            current = result;
-            expression = [];
-            updateScreen(result);
-            isEqualsPressed = true;
+            expression.push(current);
+
+            if (isValidExpression(expression)) {
+                result = evaluateExpression(expression);
+                current = result;
+                expression = [];
+                updateScreen(result);
+                isEqualsPressed = true;
+            }
         }
     });
 }
