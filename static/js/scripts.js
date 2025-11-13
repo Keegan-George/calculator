@@ -46,6 +46,7 @@ function initalizeInputButtons() {
     const equalButton = document.querySelector(".equal-button");
     const digitButtons = document.querySelectorAll(".input-button");
     const operatorButtons = document.querySelectorAll(".operator-button");
+    const backspaceButton = document.querySelector(".backspace");
 
     digitButtons.forEach(button => {
         button.addEventListener("click", event => {
@@ -108,7 +109,19 @@ function initalizeInputButtons() {
             }
         }
     });
+
+    backspaceButton.addEventListener("click", () => {
+        if (currentNumber.length === 1){
+            currentNumber = "";
+            updateScreen("0");
+        }
+        else{
+            currentNumber = currentNumber.slice(0, -1);
+            updateScreen(currentNumber);
+        }
+    });
 }
+
 
 function updateScreen(str) {
     const screen = document.querySelector(".screen");
