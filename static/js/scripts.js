@@ -94,7 +94,7 @@ function operatorPress(event) {
     }
 }
 
-function equalPress(){
+function equalPress() {
     if (expression.length == 2) {
         expression.push(currentNumber);
 
@@ -115,6 +115,21 @@ function equalPress(){
         }
     }
 }
+
+function decimalPress() {
+    if (currentNumber.indexOf(".") === -1) {
+        if (currentNumber === "") {
+            currentNumber = "0.";
+        }
+        else {
+            currentNumber += "."
+        }
+
+        updateScreen(currentNumber);
+    }
+}
+
+
 
 function initalizeInputButtons() {
     const clearButton = document.querySelector(".clear-button");
@@ -157,17 +172,23 @@ function initalizeInputButtons() {
     });
 
     decimalButton.addEventListener("click", () => {
-        if (currentNumber.indexOf(".") === -1) {
-            if (currentNumber === "") {
-                currentNumber = "0.";
-            }
-            else {
-                currentNumber += "."
-            }
-
-            updateScreen(currentNumber);
-        }
+        decimalPress();
     })
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            clear();
+            updateScreen(result);
+        }
+
+        else if (event.key === "=") {
+            equalPress();
+        }
+
+        else if (event.key === "."){
+            decimalPress();
+        }
+    });
 }
 
 function updateScreen(str) {
