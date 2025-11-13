@@ -1,11 +1,12 @@
-/*
-Colour palette:
-1. #1C1F26
-2. #4C585B
-3. #7E99A3
-4. #A5BFCC
-5. #F4EDD3 (hsl(47.3, 60%, 89.2%))
-*/
+:root {
+    --bg-color: #1C1F26;
+    --calc-color: #4C585B;
+    --button-color: #7E99A3;
+    --screen-color: #A5BFCC;
+    --button-hover-color: hsl(47.3, 60%, 89.2%);
+    --button-active-color: hsl(47.3, 60%, 59.2%);
+    --button-active-border-color: #EEEE;
+}
 
 * {
     margin: 0;
@@ -15,7 +16,7 @@ Colour palette:
 
 body {
     font-family: 'Courier New', Courier, monospace;
-    background-color: #1C1F26;
+    background-color: var(--bg-color);
 }
 
 .container {
@@ -30,7 +31,7 @@ body {
     border: 4px solid black;
     border-radius: 10px;
     padding: 1em;
-    background-color: #4C585B;
+    background-color: var(--calc-color);
 }
 
 
@@ -38,7 +39,7 @@ body {
     border: 3px solid black;
     padding: 0.75em;
     border-radius: 10px;
-    background-color: #A5BFCC;
+    background-color: var(--screen-color);
     margin-bottom: 5px;
     font-weight: 900;
     font-size: 50px;
@@ -59,17 +60,16 @@ button {
     flex: 1;
     padding: 2em;
     border-radius: 10px;
-    background-color: #7E99A3;
+    background-color: var(--button-color);
     font-weight: 900;
     font-size: 20px;
 }
 
 button:hover {
-    background-color: hsl(47.3, 60%, 89.2%);
-
+    background-color: var(--button-hover-color)
 }
 
 button:active {
-    background-color: hsl(47.3, 60%, 59.2%);
-    border-color: #EEEE;
+    background-color: var(--button-active-color);
+    border-color: var(--button-active-border-color)
 }
