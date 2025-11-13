@@ -8,6 +8,8 @@ let expression = [];
 const errorMessage = "E R R O R";
 let isEqualsPressed = false;
 
+const arithmeticKeys = ["+", "-", "*", "/"]
+
 
 function add(a, b) {
     return a + b;
@@ -41,18 +43,6 @@ function operate(operator, num1, num2) {
     }
 }
 
-function digitPress(event) {
-    if (isEqualsPressed) {
-        clear();
-        isEqualsPressed = false;
-    }
-
-    let digit = event.target.innerText;
-
-    currentNumber === "0" ? currentNumber = digit : currentNumber += digit;
-    updateScreen(currentNumber);
-}
-
 function clear() {
     currentNumber = "";
     result = "0";
@@ -60,12 +50,45 @@ function clear() {
     expression = [];
 }
 
+function digitPress(event) {
+    if (isEqualsPressed) {
+        clear();
+        isEqualsPressed = false;
+    }
+
+    let digit;
+
+    if (event.type === "click") {
+        digit = event.target.innerText;
+    }
+    else if (event.type === "keydown") {
+        digit = event.key;
+    }
+
+    currentNumber === "0" ? currentNumber = digit : currentNumber += digit;
+    updateScreen(currentNumber);
+}
+
+
 function operatorPress(event) {
     if (isEqualsPressed) {
         isEqualsPressed = false;
     }
 
-    operator = event.target.innerText;
+    if (event.type === "click"){
+        operator = event.target.innerText;
+    }
+
+    else if (event.type === "keydown"){
+        if (event.key === "*"){
+            operator = "x";
+        }
+
+        else {
+            operator = event.key;
+        }
+    }
+
 
     if (currentNumber) {
         expression.push(currentNumber);
@@ -129,7 +152,16 @@ function decimalPress() {
     }
 }
 
-
+function backspacePress() {
+    if (currentNumber.length === 1) {
+        currentNumber = "";
+        updateScreen("0");
+    }
+    else {
+        currentNumber = currentNumber.slice(0, -1);
+        updateScreen(currentNumber);
+    }
+}
 
 function initalizeInputButtons() {
     const clearButton = document.querySelector(".clear-button");
@@ -161,14 +193,7 @@ function initalizeInputButtons() {
     });
 
     backspaceButton.addEventListener("click", () => {
-        if (currentNumber.length === 1) {
-            currentNumber = "";
-            updateScreen("0");
-        }
-        else {
-            currentNumber = currentNumber.slice(0, -1);
-            updateScreen(currentNumber);
-        }
+        backspacePress();
     });
 
     decimalButton.addEventListener("click", () => {
@@ -181,12 +206,24 @@ function initalizeInputButtons() {
             updateScreen(result);
         }
 
-        else if (event.key === "=") {
+        else if (event.key === "=" || event.key === "Enter") {
             equalPress();
         }
 
-        else if (event.key === "."){
+        else if (event.key === ".") {
             decimalPress();
+        }
+
+        else if (event.key === "Backspace") {
+            backspacePress();
+        }
+
+        else if (arithmeticKeys.indexOf(event.key) !== -1) {
+            operatorPress(event);
+        }
+
+        else if (isFinite(event.key)) {
+            digitPress(event);
         }
     });
 }
