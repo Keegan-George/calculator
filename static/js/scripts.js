@@ -47,6 +47,7 @@ function initalizeInputButtons() {
     const digitButtons = document.querySelectorAll(".input-button");
     const operatorButtons = document.querySelectorAll(".operator-button");
     const backspaceButton = document.querySelector(".backspace");
+    const decimalButton = document.querySelector(".decimal-button");
 
     digitButtons.forEach(button => {
         button.addEventListener("click", event => {
@@ -89,7 +90,7 @@ function initalizeInputButtons() {
                 currentNumber = "";
             }
 
-            else if (expression.length == 2){
+            else if (expression.length == 2) {
                 expression[1] = operator;
             }
         });
@@ -111,17 +112,29 @@ function initalizeInputButtons() {
     });
 
     backspaceButton.addEventListener("click", () => {
-        if (currentNumber.length === 1){
+        if (currentNumber.length === 1) {
             currentNumber = "";
             updateScreen("0");
         }
-        else{
+        else {
             currentNumber = currentNumber.slice(0, -1);
             updateScreen(currentNumber);
         }
     });
-}
 
+    decimalButton.addEventListener("click", () => {
+        if (currentNumber.indexOf(".") === -1) {
+            if (currentNumber === "") {
+                currentNumber = "0.";
+            }
+            else {
+                currentNumber += "."
+            }
+
+            updateScreen(currentNumber);
+        }
+    })
+}
 
 function updateScreen(str) {
     const screen = document.querySelector(".screen");
@@ -142,7 +155,7 @@ function clear() {
 
 function isValidExpression(expression) {
     const [num1, op, num2] = expression;
-  
+
     if (!isNaN(num1) && !isNaN(num2) && op) {
         return true;
     }
