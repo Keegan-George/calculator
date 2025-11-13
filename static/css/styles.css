@@ -68,7 +68,7 @@ button {
 
 button:hover {
     background-color: var(--button-hover-color);
-    transition: background-color 0.2s ease, transform 0.2s ease;
+    transition: background-color 0.2s, transform 0.2s;
 }
 
 button:active {
