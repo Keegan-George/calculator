@@ -1,4 +1,4 @@
-initalizeInputButtons();
+initializeButtons();
 
 let result = "0";
 let currentNumber = "";
@@ -163,7 +163,7 @@ function backspacePress() {
     }
 }
 
-function initalizeInputButtons() {
+function initializeButtons() {
     const clearButton = document.querySelector(".clear-button");
     const equalButton = document.querySelector(".equal-button");
     const digitButtons = document.querySelectorAll(".input-button");
