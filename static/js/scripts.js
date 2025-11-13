@@ -5,7 +5,7 @@ let currentNumber = "";
 let operator = "";
 let expression = [];
 
-const error_message = "E R R O R";
+const errorMessage = "E R R O R";
 let isEqualsPressed = false;
 
 
@@ -81,9 +81,17 @@ function initalizeInputButtons() {
 
                 if (isValidExpression(expression)) {
                     result = evaluateExpression(expression);
-                    expression = [];
-                    expression.push(result);
-                    updateScreen(result);
+
+                    if (isNaN(result) || !isFinite(result)) {
+                        clear();
+                        updateScreen(errorMessage);
+                    }
+
+                    else {
+                        expression = [];
+                        expression.push(result);
+                        updateScreen(result);
+                    }
                 }
 
                 expression.push(operator);
@@ -103,10 +111,18 @@ function initalizeInputButtons() {
 
             if (isValidExpression(expression)) {
                 result = evaluateExpression(expression);
-                currentNumber = result;
-                expression = [];
-                updateScreen(result);
-                isEqualsPressed = true;
+
+                if (isNaN(result) || !isFinite(result)) {
+                    clear();
+                    updateScreen(errorMessage);
+                }
+
+                else {
+                    currentNumber = result;
+                    expression = [];
+                    updateScreen(result);
+                    isEqualsPressed = true;
+                }
             }
         }
     });
@@ -166,8 +182,4 @@ function isValidExpression(expression) {
 function evaluateExpression(expression) {
     const [num1, op, num2] = expression
     return operate(op, +num1, +num2);
-}
-
-function isInvalidNumber(num) {
-    return isNaN(result) || !isFinite(result)
 }
