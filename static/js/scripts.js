@@ -41,6 +41,81 @@ function operate(operator, num1, num2) {
     }
 }
 
+function digitPress(event) {
+    if (isEqualsPressed) {
+        clear();
+        isEqualsPressed = false;
+    }
+
+    let digit = event.target.innerText;
+
+    currentNumber === "0" ? currentNumber = digit : currentNumber += digit;
+    updateScreen(currentNumber);
+}
+
+function clear() {
+    currentNumber = "";
+    result = "0";
+    operator = "";
+    expression = [];
+}
+
+function operatorPress(event) {
+    if (isEqualsPressed) {
+        isEqualsPressed = false;
+    }
+
+    operator = event.target.innerText;
+
+    if (currentNumber) {
+        expression.push(currentNumber);
+
+        if (isValidExpression(expression)) {
+            result = evaluateExpression(expression);
+
+            if (isNaN(result) || !isFinite(result)) {
+                clear();
+                updateScreen(errorMessage);
+            }
+
+            else {
+                expression = [];
+                expression.push(result);
+                updateScreen(result);
+            }
+        }
+
+        expression.push(operator);
+        currentNumber = "";
+    }
+
+    else if (expression.length == 2) {
+        expression[1] = operator;
+    }
+}
+
+function equalPress(){
+    if (expression.length == 2) {
+        expression.push(currentNumber);
+
+        if (isValidExpression(expression)) {
+            result = evaluateExpression(expression);
+
+            if (isNaN(result) || !isFinite(result)) {
+                clear();
+                updateScreen(errorMessage);
+            }
+
+            else {
+                currentNumber = result;
+                expression = [];
+                updateScreen(result);
+                isEqualsPressed = true;
+            }
+        }
+    }
+}
+
 function initalizeInputButtons() {
     const clearButton = document.querySelector(".clear-button");
     const equalButton = document.querySelector(".equal-button");
@@ -51,15 +126,7 @@ function initalizeInputButtons() {
 
     digitButtons.forEach(button => {
         button.addEventListener("click", event => {
-            if (isEqualsPressed) {
-                clear();
-                isEqualsPressed = false;
-            }
-
-            let digit = event.target.innerText;
-
-            currentNumber === "0" ? currentNumber = digit : currentNumber += digit;
-            updateScreen(currentNumber);
+            digitPress(event);
         });
     });
 
@@ -70,61 +137,12 @@ function initalizeInputButtons() {
 
     operatorButtons.forEach(button => {
         button.addEventListener("click", event => {
-            if (isEqualsPressed) {
-                isEqualsPressed = false;
-            }
-
-            operator = event.target.innerText;
-
-            if (currentNumber) {
-                expression.push(currentNumber);
-
-                if (isValidExpression(expression)) {
-                    result = evaluateExpression(expression);
-
-                    if (isNaN(result) || !isFinite(result)) {
-                        clear();
-                        updateScreen(errorMessage);
-                    }
-
-                    else {
-                        expression = [];
-                        expression.push(result);
-                        updateScreen(result);
-                    }
-                }
-
-                expression.push(operator);
-                currentNumber = "";
-            }
-
-            else if (expression.length == 2) {
-                expression[1] = operator;
-            }
+            operatorPress(event);
         });
     });
 
     equalButton.addEventListener("click", () => {
-        if (expression.length == 2) {
-
-            expression.push(currentNumber);
-
-            if (isValidExpression(expression)) {
-                result = evaluateExpression(expression);
-
-                if (isNaN(result) || !isFinite(result)) {
-                    clear();
-                    updateScreen(errorMessage);
-                }
-
-                else {
-                    currentNumber = result;
-                    expression = [];
-                    updateScreen(result);
-                    isEqualsPressed = true;
-                }
-            }
-        }
+        equalPress();
     });
 
     backspaceButton.addEventListener("click", () => {
@@ -160,13 +178,6 @@ function updateScreen(str) {
 function round(number, precision = 11) {
     const decimalPlaces = 10 ** precision;
     return Math.round(number * decimalPlaces) / decimalPlaces;
-}
-
-function clear() {
-    currentNumber = "";
-    result = "0";
-    operator = "";
-    expression = [];
 }
 
 function isValidExpression(expression) {
