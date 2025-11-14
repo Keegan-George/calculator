@@ -26,7 +26,7 @@ function operate(operator, num1, num2) {
 
 function clear() {
     calculatorState.currentNumber = "";
-    calculatorState.result = "0";
+    calculatorState.result = DEFAULT_RESULT;
     calculatorState.operator = "";
     calculatorState.expression = [];
     calculatorState.isEqualsPressed = false;
@@ -46,7 +46,7 @@ function handleDigitInput(event) {
         digit = event.key;
     }
 
-    calculatorState.currentNumber === "0" ? calculatorState.currentNumber = digit : calculatorState.currentNumber += digit;
+    calculatorState.currentNumber === DEFAULT_RESULT ? calculatorState.currentNumber = digit : calculatorState.currentNumber += digit;
     updateScreen(calculatorState.currentNumber);
 }
 
@@ -136,7 +136,7 @@ function handleDecimalInput() {
 function handleBackspaceInput() {
     if (calculatorState.currentNumber.length === 1) {
         calculatorState.currentNumber = "";
-        updateScreen("0");
+        updateScreen(DEFAULT_RESULT);
     }
     else {
         calculatorState.currentNumber = calculatorState.currentNumber.slice(0, -1);
