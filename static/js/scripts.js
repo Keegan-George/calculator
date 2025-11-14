@@ -1,13 +1,15 @@
 initializeButtons();
 
-let result = "0";
-let currentNumber = "";
-let operator = "";
-let expression = [];
+
+const calculatorState = {
+    result: "0",
+    operator: "",
+    currentNumber: "",
+    expression: [],
+    isEqualsPressed: false
+}
 
 const errorMessage = "E R R O R";
-let isEqualsPressed = false;
-
 const arithmeticKeys = ["+", "-", "*", "/"]
 
 
@@ -44,16 +46,16 @@ function operate(operator, num1, num2) {
 }
 
 function clear() {
-    currentNumber = "";
-    result = "0";
-    operator = "";
-    expression = [];
+    calculatorState.currentNumber = "";
+    calculatorState.result = "0";
+    calculatorState.operator = "";
+    calculatorState.expression = [];
+    calculatorState.isEqualsPressed;
 }
 
 function digitPress(event) {
-    if (isEqualsPressed) {
+    if (calculatorState.isEqualsPressed) {
         clear();
-        isEqualsPressed = false;
     }
 
     let digit;
@@ -65,101 +67,101 @@ function digitPress(event) {
         digit = event.key;
     }
 
-    currentNumber === "0" ? currentNumber = digit : currentNumber += digit;
-    updateScreen(currentNumber);
+    calculatorState.currentNumber === "0" ? calculatorState.currentNumber = digit : calculatorState.currentNumber += digit;
+    updateScreen(calculatorState.currentNumber);
 }
 
 
 function operatorPress(event) {
-    if (isEqualsPressed) {
-        isEqualsPressed = false;
+    if (calculatorState.isEqualsPressed) {
+        calculatorState.isEqualsPressed = false;
     }
 
-    if (event.type === "click"){
-        operator = event.target.innerText;
+    if (event.type === "click") {
+        calculatorState.operator = event.target.innerText;
     }
 
-    else if (event.type === "keydown"){
-        if (event.key === "*"){
-            operator = "x";
+    else if (event.type === "keydown") {
+        if (event.key === "*") {
+            calculatorState.operator = "x";
         }
 
         else {
-            operator = event.key;
+            calculatorState.operator = event.key;
         }
     }
 
 
-    if (currentNumber) {
-        expression.push(currentNumber);
+    if (calculatorState.currentNumber) {
+        calculatorState.expression.push(calculatorState.currentNumber);
 
-        if (isValidExpression(expression)) {
-            result = evaluateExpression(expression);
+        if (isValidExpression(calculatorState.expression)) {
+            calculatorState.result = evaluateExpression(calculatorState.expression);
 
-            if (isNaN(result) || !isFinite(result)) {
+            if (isNaN(calculatorState.result) || !isFinite(calculatorState.result)) {
                 clear();
                 updateScreen(errorMessage);
             }
 
             else {
-                expression = [];
-                expression.push(result);
-                updateScreen(result);
+                calculatorState.expression = [];
+                calculatorState.expression.push(calculatorState.result);
+                updateScreen(calculatorState.result);
             }
         }
 
-        expression.push(operator);
-        currentNumber = "";
+        calculatorState.expression.push(calculatorState.operator);
+        calculatorState.currentNumber = "";
     }
 
-    else if (expression.length == 2) {
-        expression[1] = operator;
+    else if (calculatorState.expression.length == 2) {
+        calculatorState.expression[1] = calculatorState.operator;
     }
 }
 
 function equalPress() {
-    if (expression.length == 2) {
-        expression.push(currentNumber);
+    if (calculatorState.expression.length == 2) {
+        calculatorState.expression.push(calculatorState.currentNumber);
 
-        if (isValidExpression(expression)) {
-            result = evaluateExpression(expression);
+        if (isValidExpression(calculatorState.expression)) {
+            calculatorState.result = evaluateExpression(calculatorState.expression);
 
-            if (isNaN(result) || !isFinite(result)) {
+            if (isNaN(calculatorState.result) || !isFinite(calculatorState.result)) {
                 clear();
                 updateScreen(errorMessage);
             }
 
             else {
-                currentNumber = result;
-                expression = [];
-                updateScreen(result);
-                isEqualsPressed = true;
+                calculatorState.currentNumber = calculatorState.result;
+                calculatorState.expression = [];
+                updateScreen(calculatorState.result);
+                calculatorState.isEqualsPressed = true;
             }
         }
     }
 }
 
 function decimalPress() {
-    if (currentNumber.indexOf(".") === -1) {
-        if (currentNumber === "") {
-            currentNumber = "0.";
+    if (calculatorState.currentNumber.indexOf(".") === -1) {
+        if (calculatorState.currentNumber === "") {
+            calculatorState.currentNumber = "0.";
         }
         else {
-            currentNumber += "."
+            calculatorState.currentNumber += "."
         }
 
-        updateScreen(currentNumber);
+        updateScreen(calculatorState.currentNumber);
     }
 }
 
 function backspacePress() {
-    if (currentNumber.length === 1) {
-        currentNumber = "";
+    if (calculatorState.currentNumber.length === 1) {
+        calculatorState.currentNumber = "";
         updateScreen("0");
     }
     else {
-        currentNumber = currentNumber.slice(0, -1);
-        updateScreen(currentNumber);
+        calculatorState.currentNumber = calculatorState.currentNumber.slice(0, -1);
+        updateScreen(calculatorState.currentNumber);
     }
 }
 
@@ -179,7 +181,7 @@ function initializeButtons() {
 
     clearButton.addEventListener("click", () => {
         clear();
-        updateScreen(result);
+        updateScreen(calculatorState.result);
     });
 
     operatorButtons.forEach(button => {
@@ -203,7 +205,7 @@ function initializeButtons() {
     document.addEventListener("keydown", (event) => {
         if (event.key === "Escape") {
             clear();
-            updateScreen(result);
+            updateScreen(calculatorState.result);
         }
 
         else if (event.key === "=" || event.key === "Enter") {
