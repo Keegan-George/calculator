@@ -1,4 +1,6 @@
-initializeButtons();
+document.addEventListener("DOMContentLoaded", () => {
+    initializeButtons();
+});
 
 //constants
 const DEFAULT_RESULT = "0";
@@ -51,7 +53,7 @@ function handleOperatorInput(event) {
 
     calculatorState.operator = event.type === "click" ? event.target.innerText : event.key;
 
-    if (calculatorState.operator === "x"){
+    if (calculatorState.operator === "x") {
         calculatorState.operator = "*";
     }
 
