@@ -1,15 +1,18 @@
 initializeButtons();
 
+//constants
+const DEFAULT_RESULT = "0";
+const ERROR_MESSAGE = "E R R O R";
 
 const calculatorState = {
-    result: "0",
     operator: "",
     currentNumber: "",
     expression: [],
-    isEqualsPressed: false
+    result: DEFAULT_RESULT,
+    isEqualsPressed: false,
 }
 
-const errorMessage = "E R R O R";
+
 const arithmeticKeys = ["+", "-", "*", "/"]
 
 
@@ -100,7 +103,7 @@ function operatorPress(event) {
 
             if (isNaN(calculatorState.result) || !isFinite(calculatorState.result)) {
                 clear();
-                updateScreen(errorMessage);
+                updateScreen(ERROR_MESSAGE);
             }
 
             else {
@@ -128,7 +131,7 @@ function equalPress() {
 
             if (isNaN(calculatorState.result) || !isFinite(calculatorState.result)) {
                 clear();
-                updateScreen(errorMessage);
+                updateScreen(ERROR_MESSAGE);
             }
 
             else {
