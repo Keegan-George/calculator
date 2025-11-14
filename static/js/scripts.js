@@ -37,14 +37,7 @@ function handleDigitInput(event) {
         clear();
     }
 
-    let digit;
-
-    if (event.type === "click") {
-        digit = event.target.innerText;
-    }
-    else if (event.type === "keydown") {
-        digit = event.key;
-    }
+    const digit = event.type === "click" ? event.target.innerText : event.key;
 
     calculatorState.currentNumber === DEFAULT_RESULT ? calculatorState.currentNumber = digit : calculatorState.currentNumber += digit;
     updateScreen(calculatorState.currentNumber);
