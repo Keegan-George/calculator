@@ -16,7 +16,7 @@ const calculatorState = {
 const operations = {
     "+": (a, b) => a + b,
     "-": (a, b) => a - b,
-    "x": (a, b) => a * b,
+    "*": (a, b) => a * b,
     "/": (a, b) => a / b,
 }
 
@@ -49,20 +49,11 @@ function handleOperatorInput(event) {
         calculatorState.isEqualsPressed = false;
     }
 
-    if (event.type === "click") {
-        calculatorState.operator = event.target.innerText;
+    calculatorState.operator = event.type === "click" ? event.target.innerText : event.key;
+
+    if (calculatorState.operator === "x"){
+        calculatorState.operator = "*";
     }
-
-    else if (event.type === "keydown") {
-        if (event.key === "*") {
-            calculatorState.operator = "x";
-        }
-
-        else {
-            calculatorState.operator = event.key;
-        }
-    }
-
 
     if (calculatorState.currentNumber) {
         calculatorState.expression.push(calculatorState.currentNumber);
