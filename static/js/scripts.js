@@ -61,14 +61,15 @@ function handleOperatorInput(event) {
         calculatorState.expression.push(calculatorState.currentNumber);
 
         if (isValidExpression(calculatorState.expression)) {
-            calculatorState.result = evaluateExpression(calculatorState.expression);
+            result = evaluateExpression(calculatorState.expression);
 
-            if (isNaN(calculatorState.result) || !isFinite(calculatorState.result)) {
+            if (isNaN(result) || !isFinite(result)) {
                 clear();
                 updateScreen(ERROR_MESSAGE);
             }
 
             else {
+                calculatorState.result = result.toString();
                 calculatorState.expression = [];
                 calculatorState.expression.push(calculatorState.result);
                 updateScreen(calculatorState.result);
@@ -89,14 +90,15 @@ function handleEqualsInput() {
         calculatorState.expression.push(calculatorState.currentNumber);
 
         if (isValidExpression(calculatorState.expression)) {
-            calculatorState.result = evaluateExpression(calculatorState.expression);
+            result = evaluateExpression(calculatorState.expression);
 
-            if (isNaN(calculatorState.result) || !isFinite(calculatorState.result)) {
+            if (isNaN(result) || !isFinite(result)) {
                 clear();
                 updateScreen(ERROR_MESSAGE);
             }
 
             else {
+                calculatorState.result = result.toString()
                 calculatorState.currentNumber = calculatorState.result;
                 calculatorState.expression = [];
                 updateScreen(calculatorState.result);
