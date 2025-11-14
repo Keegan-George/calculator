@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 //constants
 const DEFAULT_RESULT = "0";
 const ERROR_MESSAGE = "E R R O R";
-const arithmeticKeys = ["+", "-", "*", "/"]
+const ARITHMETIC_KEYS = ["+", "-", "*", "/"]
 
 const calculatorState = {
     operator: "",
@@ -86,7 +86,7 @@ function handleOperatorInput(event) {
 }
 
 function handleEqualsInput() {
-    if (calculatorState.expression.length == 2) {
+    if (calculatorState.expression.length === 2) {
         calculatorState.expression.push(calculatorState.currentNumber);
 
         if (isValidExpression(calculatorState.expression)) {
@@ -187,7 +187,7 @@ function initializeButtons() {
             handleBackspaceInput();
         }
 
-        else if (arithmeticKeys.includes(event.key)) {
+        else if (ARITHMETIC_KEYS.includes(event.key)) {
             handleOperatorInput(event);
         }
 
