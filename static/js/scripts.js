@@ -61,7 +61,7 @@ function handleOperatorInput(event) {
         calculatorState.expression.push(calculatorState.currentNumber);
 
         if (isValidExpression(calculatorState.expression)) {
-            result = evaluateExpression(calculatorState.expression);
+            let result = evaluateExpression(calculatorState.expression);
 
             if (isNaN(result) || !isFinite(result)) {
                 clear();
@@ -90,7 +90,7 @@ function handleEqualsInput() {
         calculatorState.expression.push(calculatorState.currentNumber);
 
         if (isValidExpression(calculatorState.expression)) {
-            result = evaluateExpression(calculatorState.expression);
+            let result = evaluateExpression(calculatorState.expression);
 
             if (isNaN(result) || !isFinite(result)) {
                 clear();
