@@ -121,7 +121,7 @@ function handleEqualsInput() {
 }
 
 function handleDecimalInput() {
-    if (calculatorState.currentNumber.indexOf(".") === -1) {
+    if (!calculatorState.currentNumber.includes(".")) {
         if (calculatorState.currentNumber === "") {
             calculatorState.currentNumber = "0.";
         }
@@ -199,7 +199,7 @@ function initializeButtons() {
             handleBackspaceInput();
         }
 
-        else if (arithmeticKeys.indexOf(event.key) !== -1) {
+        else if (arithmeticKeys.includes(event.key)) {
             handleOperatorInput(event);
         }
 
