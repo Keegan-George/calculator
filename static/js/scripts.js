@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 //constants
 const DEFAULT_RESULT = "0";
 const ERROR_MESSAGE = "E R R O R";
-const ARITHMETIC_KEYS = ["+", "-", "*", "/"]
+const ARITHMETIC_KEYS = ["+", "-", "*", "/"];
 
 const calculatorState = {
     operator: "",
@@ -98,7 +98,7 @@ function handleEqualsInput() {
             }
 
             else {
-                calculatorState.result = result.toString()
+                calculatorState.result = result.toString();
                 calculatorState.currentNumber = calculatorState.result;
                 calculatorState.expression = [];
                 updateScreen(calculatorState.result);
@@ -167,7 +167,7 @@ function initializeButtons() {
 
     decimalButton.addEventListener("click", () => {
         handleDecimalInput();
-    })
+    });
 
     document.addEventListener("keydown", (event) => {
         if (event.key === "Escape") {
@@ -218,6 +218,6 @@ function isValidExpression(expression) {
 }
 
 function evaluateExpression(expression) {
-    const [num1, op, num2] = expression
+    const [num1, op, num2] = expression;
     return operate(op, +num1, +num2);
 }
