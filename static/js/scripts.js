@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    initializeButtons();
+    initializeCalculatorButtons();
 });
 
 //constants
@@ -22,10 +22,20 @@ const operations = {
     "/": (a, b) => a / b,
 }
 
+/**
+ * Performs the specified arithmetic operation on two numbers and rounds the result.
+ * @param {string} operator - The arithmetic operator ("+", "-", "*", "/").
+ * @param {number} num1 - The first operand.
+ * @param {number} num2 - The second operand.
+ * @returns {number} The rounded result of the operation.
+ */
 function operate(operator, num1, num2) {
     return round(operations[operator](num1, num2));
 }
 
+/**
+ * Resets the calculator state to its default values.
+ */
 function resetCalculatorState() {
     calculatorState.currentNumber = "";
     calculatorState.result = DEFAULT_RESULT;
@@ -34,6 +44,10 @@ function resetCalculatorState() {
     calculatorState.isEqualsPressed = false;
 }
 
+/**
+ * Handles digit input from a button click or keyboard press.
+ * @param {Event} event - The input event.
+ */
 function handleDigitInput(event) {
     if (calculatorState.isEqualsPressed) {
         resetCalculatorState();
@@ -45,7 +59,10 @@ function handleDigitInput(event) {
     updateScreen(calculatorState.currentNumber);
 }
 
-
+/**
+ * Handles operator input from a button click or keyboard press.
+ * @param {Event} event - The input event.
+ */
 function handleOperatorInput(event) {
     if (calculatorState.isEqualsPressed) {
         calculatorState.isEqualsPressed = false;
@@ -85,6 +102,9 @@ function handleOperatorInput(event) {
     }
 }
 
+/**
+ * Handles equals input for evaluating an expression.
+ */
 function handleEqualsInput() {
     if (calculatorState.expression.length === 2) {
         calculatorState.expression.push(calculatorState.currentNumber);
@@ -108,6 +128,9 @@ function handleEqualsInput() {
     }
 }
 
+/**
+ * Handles decimal point input on current number.
+ */
 function handleDecimalInput() {
     if (!calculatorState.currentNumber.includes(".")) {
         if (calculatorState.currentNumber === "") {
@@ -121,6 +144,9 @@ function handleDecimalInput() {
     }
 }
 
+/**
+ * Handles backspace input to remove the last digit from the current number.
+ */
 function handleBackspaceInput() {
     if (calculatorState.currentNumber.length === 1) {
         calculatorState.currentNumber = "";
@@ -132,7 +158,10 @@ function handleBackspaceInput() {
     }
 }
 
-function initializeButtons() {
+/**
+ * Initializes the button click and keyboard event listeners.
+ */
+function initializeCalculatorButtons() {
     const clearButton = document.querySelector(".clear-button");
     const equalButton = document.querySelector(".equal-button");
     const digitButtons = document.querySelectorAll(".input-button");
@@ -197,16 +226,31 @@ function initializeButtons() {
     });
 }
 
+/**
+ * Updates the calculator screen with the provided string.
+ * @param {string} str - The string value to be displayed. 
+ */
 function updateScreen(str) {
     const screen = document.querySelector(".screen");
     screen.innerText = str;
 }
 
+/**
+ * Rounds a number to the specified precision.
+ * @param {number} number - The number to be rounded.
+ * @param {number} precision - Number of decimal places.
+ * @returns {number} The rounded number.
+ */
 function round(number, precision = 11) {
     const decimalPlaces = 10 ** precision;
     return Math.round(number * decimalPlaces) / decimalPlaces;
 }
 
+/**
+ * Determines if the calculator expression array is a valid math expression.
+ * @param {string[]} expression - An array expected in the format [num1, operator, num2].  
+ * @returns {boolean} True if a valid expression, false otherwise.
+ */
 function isValidExpression(expression) {
     const [num1, op, num2] = expression;
 
@@ -217,11 +261,21 @@ function isValidExpression(expression) {
     return false;
 }
 
+/**
+ * Evaluates a valid math expression
+ * @param {string[]} expression - An array expected in the format [num1, operator, num2].
+ * @returns {number} The resut of the expression.
+ */
 function evaluateExpression(expression) {
     const [num1, op, num2] = expression;
     return operate(op, +num1, +num2);
 }
 
-function extractEventInput(event){
+/**
+ * Retrieves the user input from a click or keyboard event.
+ * @param {Event} - input event.
+ * @returns {string} - The retrieved input value. 
+ */
+function extractEventInput(event) {
     return event.type === "click" ? event.target.innerText : event.key;
 }
