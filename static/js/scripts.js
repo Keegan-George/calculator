@@ -32,7 +32,7 @@ function clear() {
     calculatorState.isEqualsPressed = false;
 }
 
-function digitPress(event) {
+function handleDigitInput(event) {
     if (calculatorState.isEqualsPressed) {
         clear();
     }
@@ -51,7 +51,7 @@ function digitPress(event) {
 }
 
 
-function operatorPress(event) {
+function handleOperatorInput(event) {
     if (calculatorState.isEqualsPressed) {
         calculatorState.isEqualsPressed = false;
     }
@@ -98,7 +98,7 @@ function operatorPress(event) {
     }
 }
 
-function equalPress() {
+function handleEqualsInput() {
     if (calculatorState.expression.length == 2) {
         calculatorState.expression.push(calculatorState.currentNumber);
 
@@ -120,7 +120,7 @@ function equalPress() {
     }
 }
 
-function decimalPress() {
+function handleDecimalInput() {
     if (calculatorState.currentNumber.indexOf(".") === -1) {
         if (calculatorState.currentNumber === "") {
             calculatorState.currentNumber = "0.";
@@ -133,7 +133,7 @@ function decimalPress() {
     }
 }
 
-function backspacePress() {
+function handleBackspaceInput() {
     if (calculatorState.currentNumber.length === 1) {
         calculatorState.currentNumber = "";
         updateScreen("0");
@@ -154,7 +154,7 @@ function initializeButtons() {
 
     digitButtons.forEach(button => {
         button.addEventListener("click", event => {
-            digitPress(event);
+            handleDigitInput(event);
         });
     });
 
@@ -165,20 +165,20 @@ function initializeButtons() {
 
     operatorButtons.forEach(button => {
         button.addEventListener("click", event => {
-            operatorPress(event);
+            handleOperatorInput(event);
         });
     });
 
     equalButton.addEventListener("click", () => {
-        equalPress();
+        handleEqualsInput();
     });
 
     backspaceButton.addEventListener("click", () => {
-        backspacePress();
+        handleBackspaceInput();
     });
 
     decimalButton.addEventListener("click", () => {
-        decimalPress();
+        handleDecimalInput();
     })
 
     document.addEventListener("keydown", (event) => {
@@ -188,23 +188,23 @@ function initializeButtons() {
         }
 
         else if (event.key === "=" || event.key === "Enter") {
-            equalPress();
+            handleEqualsInput();
         }
 
         else if (event.key === ".") {
-            decimalPress();
+            handleDecimalInput();
         }
 
         else if (event.key === "Backspace") {
-            backspacePress();
+            handleBackspaceInput();
         }
 
         else if (arithmeticKeys.indexOf(event.key) !== -1) {
-            operatorPress(event);
+            handleOperatorInput(event);
         }
 
         else if (isFinite(event.key)) {
-            digitPress(event);
+            handleDigitInput(event);
         }
     });
 }
