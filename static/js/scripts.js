@@ -80,7 +80,7 @@ function handleOperatorInput(event) {
         if (isValidExpression(calculatorState.expression)) {
             const result = evaluateExpression(calculatorState.expression);
 
-            if (isNaN(result) || !isFinite(result)) {
+            if (isInvalidResult(result)) {
                 resetCalculatorState();
                 updateScreen(ERROR_MESSAGE);
             }
@@ -112,7 +112,7 @@ function handleEqualsInput() {
         if (isValidExpression(calculatorState.expression)) {
             const result = evaluateExpression(calculatorState.expression);
 
-            if (isNaN(result) || !isFinite(result)) {
+            if (isInvalidResult(result)) {
                 resetCalculatorState();
                 updateScreen(ERROR_MESSAGE);
             }
@@ -278,4 +278,8 @@ function evaluateExpression(expression) {
  */
 function extractEventInput(event) {
     return event.type === "click" ? event.target.innerText : event.key;
+}
+
+function isInvalidResult(result) {
+    return isNaN(result) || !isFinite(result)
 }
