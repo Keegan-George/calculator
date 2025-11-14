@@ -26,7 +26,7 @@ function operate(operator, num1, num2) {
     return round(operations[operator](num1, num2));
 }
 
-function clear() {
+function resetCalculatorState() {
     calculatorState.currentNumber = "";
     calculatorState.result = DEFAULT_RESULT;
     calculatorState.operator = "";
@@ -36,7 +36,7 @@ function clear() {
 
 function handleDigitInput(event) {
     if (calculatorState.isEqualsPressed) {
-        clear();
+        resetCalculatorState();
     }
 
     const digit = extractEventInput(event);
@@ -64,7 +64,7 @@ function handleOperatorInput(event) {
             const result = evaluateExpression(calculatorState.expression);
 
             if (isNaN(result) || !isFinite(result)) {
-                clear();
+                resetCalculatorState();
                 updateScreen(ERROR_MESSAGE);
             }
 
@@ -93,7 +93,7 @@ function handleEqualsInput() {
             const result = evaluateExpression(calculatorState.expression);
 
             if (isNaN(result) || !isFinite(result)) {
-                clear();
+                resetCalculatorState();
                 updateScreen(ERROR_MESSAGE);
             }
 
@@ -147,7 +147,7 @@ function initializeButtons() {
     });
 
     clearButton.addEventListener("click", () => {
-        clear();
+        resetCalculatorState();
         updateScreen(calculatorState.result);
     });
 
@@ -171,7 +171,7 @@ function initializeButtons() {
 
     document.addEventListener("keydown", (event) => {
         if (event.key === "Escape") {
-            clear();
+            resetCalculatorState();
             updateScreen(calculatorState.result);
         }
 
