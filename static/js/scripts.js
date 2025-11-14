@@ -39,7 +39,7 @@ function handleDigitInput(event) {
         clear();
     }
 
-    const digit = event.type === "click" ? event.target.innerText : event.key;
+    const digit = extractEventInput(event);
 
     calculatorState.currentNumber === DEFAULT_RESULT ? calculatorState.currentNumber = digit : calculatorState.currentNumber += digit;
     updateScreen(calculatorState.currentNumber);
@@ -51,7 +51,7 @@ function handleOperatorInput(event) {
         calculatorState.isEqualsPressed = false;
     }
 
-    calculatorState.operator = event.type === "click" ? event.target.innerText : event.key;
+    calculatorState.operator = extractEventInput(event);
 
     if (calculatorState.operator === "x") {
         calculatorState.operator = "*";
@@ -220,4 +220,8 @@ function isValidExpression(expression) {
 function evaluateExpression(expression) {
     const [num1, op, num2] = expression;
     return operate(op, +num1, +num2);
+}
+
+function extractEventInput(event){
+    return event.type === "click" ? event.target.innerText : event.key;
 }
