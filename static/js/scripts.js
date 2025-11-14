@@ -3,6 +3,7 @@ initializeButtons();
 //constants
 const DEFAULT_RESULT = "0";
 const ERROR_MESSAGE = "E R R O R";
+const arithmeticKeys = ["+", "-", "*", "/"]
 
 const calculatorState = {
     operator: "",
@@ -12,40 +13,15 @@ const calculatorState = {
     isEqualsPressed: false,
 }
 
-
-const arithmeticKeys = ["+", "-", "*", "/"]
-
-
-function add(a, b) {
-    return a + b;
-}
-
-function subtract(a, b) {
-    return a - b;
-}
-
-function multiply(a, b) {
-    return a * b;
-}
-
-function divide(a, b) {
-    return a / b;
+const operations = {
+    "+": (a, b) => a + b,
+    "-": (a, b) => a - b,
+    "x": (a, b) => a * b,
+    "/": (a, b) => a / b,
 }
 
 function operate(operator, num1, num2) {
-    switch (operator) {
-        case "+":
-            return round(add(num1, num2));
-
-        case "-":
-            return round(subtract(num1, num2));
-
-        case "x":
-            return round(multiply(num1, num2));
-
-        case "/":
-            return round(divide(num1, num2));
-    }
+    return round(operations[operator](num1, num2));
 }
 
 function clear() {
