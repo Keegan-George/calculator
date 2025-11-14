@@ -50,7 +50,7 @@ function clear() {
     calculatorState.result = "0";
     calculatorState.operator = "";
     calculatorState.expression = [];
-    calculatorState.isEqualsPressed;
+    calculatorState.isEqualsPressed = false;
 }
 
 function digitPress(event) {
