@@ -280,6 +280,11 @@ function extractEventInput(event) {
     return event.type === "click" ? event.target.innerText : event.key;
 }
 
+/**
+ * 
+ * @param {number} result - The number to be validated.
+ * @returns {boolean} True if invalid, false otherwise.
+ */
 function isInvalidResult(result) {
     return isNaN(result) || !isFinite(result)
 }
