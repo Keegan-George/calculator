@@ -77,7 +77,7 @@ function handleOperatorInput(event) {
         calculatorState.currentNumber = "";
     }
 
-    else if (calculatorState.expression.length == 2) {
+    else if (calculatorState.expression.length === 2) {
         calculatorState.expression[1] = calculatorState.operator;
     }
 }
@@ -110,7 +110,7 @@ function handleDecimalInput() {
             calculatorState.currentNumber = "0.";
         }
         else {
-            calculatorState.currentNumber += "."
+            calculatorState.currentNumber += ".";
         }
 
         updateScreen(calculatorState.currentNumber);
