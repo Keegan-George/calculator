@@ -4,7 +4,7 @@
   "description": "A simple calculator built using Javascript, HTML, and CSS. Currently supports the basic arithmetic operations: addition, subtraction, multiplication, and division.",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",
