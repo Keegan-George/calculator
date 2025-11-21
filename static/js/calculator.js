@@ -45,6 +45,17 @@ function resetCalculatorState() {
 }
 
 /**
+ * Rounds a number to the specified precision.
+ * @param {number} number - The number to be rounded.
+ * @param {number} precision - Number of decimal places.
+ * @returns {number} The rounded number.
+ */
+function round(number, precision = 11) {
+    const decimalPlaces = 10 ** precision;
+    return Math.round(number * decimalPlaces) / decimalPlaces;
+}
+
+/**
  * Handles digit input from a button click or keyboard press.
  * @param {Event} event - The input event.
  */
@@ -233,17 +244,6 @@ function initializeCalculatorButtons() {
 function updateScreen(str) {
     const screen = document.querySelector(".screen");
     screen.innerText = str;
-}
-
-/**
- * Rounds a number to the specified precision.
- * @param {number} number - The number to be rounded.
- * @param {number} precision - Number of decimal places.
- * @returns {number} The rounded number.
- */
-function round(number, precision = 11) {
-    const decimalPlaces = 10 ** precision;
-    return Math.round(number * decimalPlaces) / decimalPlaces;
 }
 
 /**
