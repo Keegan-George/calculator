@@ -34,17 +34,6 @@ function operate(operator, num1, num2) {
 }
 
 /**
- * Resets the calculator state to its default values.
- */
-function resetCalculatorState() {
-    calculatorState.currentNumber = "";
-    calculatorState.result = DEFAULT_RESULT;
-    calculatorState.operator = "";
-    calculatorState.expression = [];
-    calculatorState.isEqualsPressed = false;
-}
-
-/**
  * Rounds a number to the specified precision.
  * @param {number} number - The number to be rounded.
  * @param {number} precision - Number of decimal places.
@@ -53,6 +42,17 @@ function resetCalculatorState() {
 function round(number, precision = 11) {
     const decimalPlaces = 10 ** precision;
     return Math.round(number * decimalPlaces) / decimalPlaces;
+}
+
+/**
+ * Resets the calculator state to its default values.
+ */
+function resetCalculatorState() {
+    calculatorState.currentNumber = "";
+    calculatorState.result = DEFAULT_RESULT;
+    calculatorState.operator = "";
+    calculatorState.expression = [];
+    calculatorState.isEqualsPressed = false;
 }
 
 /**
