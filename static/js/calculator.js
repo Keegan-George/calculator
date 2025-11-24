@@ -159,7 +159,7 @@ function handleDecimalInput() {
  * Handles backspace input to remove the last digit from the current number.
  */
 function handleBackspaceInput() {
-    if (calculatorState.currentNumber.length === 1) {
+    if (calculatorState.currentNumber.length <= 1) {
         calculatorState.currentNumber = "";
         updateScreen(DEFAULT_RESULT);
     }
