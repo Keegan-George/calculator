@@ -28,15 +28,15 @@ test("Subtract two integers", () => {
     expect(operate("-", 3, 1)).toBe(2);
 });
 
-test("Subtract a larger integer from another returns a negative integer", () => {
+test("Subtract a larger integer from a smaller integer returns a negative integer", () => {
     expect(operate("-", 1, 3)).toBe(-2);
 });
 
-test("Subtract a floating point number from another", () => {
+test("Subtract two floating-point numbers", () => {
     expect(operate("-", 0.3, 0.1)).toBe(0.2);
 });
 
-test("Subtract a larger floating-point number from another returns a negative floating-point number", () => {
+test("Subtract a larger floating-point number from a smaller one returns a negative floating-point number", () => {
     expect(operate("-", 0.1, 0.3)).toBe(-0.2);
 });
 
@@ -68,7 +68,7 @@ test("Multiply two floating-point numbers", () => {
     expect(operate("*", 0.2, 0.3)).toBe(0.06);
 });
 
-test("Multiply two long floating-point numbers", () => {
+test("Multiply two floating-point numbers with many decimal places", () => {
     expect(operate("*", 0.999999999, 0.999999999)).toBe(0.999_999_998);
 });
 
