@@ -1,4 +1,4 @@
-const { operate, round } = require("./math-utils.js");
+import { operate, round } from "./math-utils.js";
 
 test("Adds two integers", () => {
     expect(operate("+", 1, 2)).toBe(3);
@@ -108,18 +108,18 @@ test("Number divided by zero", () => {
     expect(operate("/", 1, 0)).toBe(Infinity);
 });
 
-test("Round a floating-point number to two decimal places", () =>{
+test("Round a floating-point number to two decimal places", () => {
     expect(round(1.2345678910, 2)).toBe(1.23);
 });
 
-test("Round a floating-point number to zero decimal places", () =>{
+test("Round a floating-point number to zero decimal places", () => {
     expect(round(2.3456789123, 0)).toBe(2);
 });
 
-test("Round an integer to 11 decimal places", () =>{
+test("Round an integer to 11 decimal places", () => {
     expect(round(3, 11)).toBe(3.00_000_000_000);
 });
 
-test("Round an integer to 0 decimal places", () =>{
+test("Round an integer to 0 decimal places", () => {
     expect(round(3, 0)).toBe(3);
 });

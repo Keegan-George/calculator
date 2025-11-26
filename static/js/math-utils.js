@@ -27,4 +27,4 @@ function round(number, precision = 11) {
     return Math.round(number * decimalPlaces) / decimalPlaces;
 }
 
-module.exports = {operate, round};
+export { operate, round };
