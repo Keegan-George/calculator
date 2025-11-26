@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "A simple calculator built using Javascript, HTML, and CSS. Currently supports the basic arithmetic operations: addition, subtraction, multiplication, and division.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "jest --coverage"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "repository": {
     "type": "git",
