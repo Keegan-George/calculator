@@ -261,3 +261,5 @@ function extractEventInput(event) {
 function isInvalidResult(result) {
     return isNaN(result) || !isFinite(result)
 }
+
+export {DEFAULT_RESULT, calculatorState, resetCalculatorState}
