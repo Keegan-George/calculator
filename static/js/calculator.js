@@ -259,7 +259,7 @@ function extractEventInput(event) {
  * @returns {boolean} True if invalid, false otherwise.
  */
 function isInvalidResult(result) {
-    return isNaN(result) || !isFinite(result)
+    return isNaN(result) || !isFinite(result);
 }
 
-export {DEFAULT_RESULT, calculatorState, resetCalculatorState}
+export { DEFAULT_RESULT, calculatorState, resetCalculatorState, handleDigitInput, handleOperatorInput, handleEqualsInput };
