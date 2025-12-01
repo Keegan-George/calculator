@@ -121,15 +121,47 @@ describe("Round function", () => {
         expect(round(1.2345678910, 2)).toBeCloseTo(1.23);
     });
 
+    test("Rounds negative float to 2 decimals", () => {
+        expect(round(-1.2345678910, 2)).toBeCloseTo(-1.23);
+    });
+
     test("Rounds float to 0 decimals", () => {
         expect(round(2.3456789123, 0)).toBe(2);
+    });
+
+    test("Rounds negative float to 0 decimals", () => {
+        expect(round(-2.3456789123, 0)).toBe(-2);
     });
 
     test("Rounds int to 11 decimals", () => {
         expect(round(3, 11)).toBeCloseTo(3.00_000_000_000);
     });
 
+    test("Rounds negative int to 11 decimals", () => {
+        expect(round(-3, 11)).toBeCloseTo(-3.00_000_000_000);
+    });
+
     test("Rounds int to 0 decimals", () => {
         expect(round(3, 0)).toBe(3);
+    });
+
+    test("Rounds negative int to 0 decimals", () => {
+        expect(round(-3, 0)).toBe(-3);
+    });
+
+    test("Round large float to 1 decimal", () => {
+        expect(round(9876543210.123, 1)).toBeCloseTo(9876543210.1);
+    });
+
+    test("Round large negative float to 1 decimal", () => {
+        expect(round(-9876543210.123, 1)).toBeCloseTo(-9876543210.1);
+    });
+
+    test("Round large float to next whole number ", () => {
+        expect(round(9876543210.987, 1)).toBeCloseTo(9876543211);
+    });
+
+    test("Round large negative float to next whole number ", () => {
+        expect(round(-9876543210.987, 1)).toBeCloseTo(-9876543211);
     });
 });
