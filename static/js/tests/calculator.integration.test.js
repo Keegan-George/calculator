@@ -2,7 +2,7 @@
 * @jest-environment jsdom
 */
 
-import { DEFAULT_RESULT, calculatorState, handleDigitInput, handleOperatorInput, handleEqualsInput, handleDecimalInput, handleBackspaceInput, resetCalculatorState } from "./calculator.js";
+import { DEFAULT_RESULT, calculatorState, handleDigitInput, handleOperatorInput, handleEqualsInput, handleDecimalInput, handleBackspaceInput, resetCalculatorState } from "../calculator.js";
 
 beforeEach(() => { resetCalculatorState() });
 

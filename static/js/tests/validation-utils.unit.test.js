@@ -1,4 +1,4 @@
-import { isValidExpression, evaluateExpression, isInvalidResult } from "./validation-utils.js";
+import { isValidExpression, evaluateExpression, isInvalidResult } from "../validation-utils.js";
 
 test("An empty array evaluates as an invalid expression", () => {
     const expression = [];

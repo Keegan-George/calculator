@@ -1,4 +1,4 @@
-import { operate, round } from "./math-utils.js";
+import { operate, round } from "../math-utils.js";
 
 test("Adds two integers", () => {
     expect(operate("+", 1, 2)).toBe(3);
