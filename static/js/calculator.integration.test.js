@@ -143,13 +143,6 @@ test("Can input a digit after a number and an operator are part of the expressio
 });
 
 test("Pressing equals evaluates a valid expression", () => {
-    const mockEvent = {
-        type: "click",
-        target: {
-            innerText: "=",
-        },
-    };
-
     const expectedState = {
         operator: "+",
         currentNumber: "41",
@@ -165,7 +158,7 @@ test("Pressing equals evaluates a valid expression", () => {
 
     document.querySelector = () => ({ innerText: "" });
 
-    handleEqualsInput(mockEvent);
+    handleEqualsInput();
     expect(calculatorState).toEqual(expectedState)
 });
 
@@ -254,13 +247,6 @@ test("Pressing an operator after calculating an expression with the equals butto
 
 
 test("Can handle division by zero", () => {
-    const mockEvent = {
-        type: "click",
-        target: {
-            innerText: "=",
-        },
-    };
-
     const expectedState = {
         operator: "",
         currentNumber: "",
@@ -275,7 +261,7 @@ test("Can handle division by zero", () => {
 
     document.querySelector = () => ({ innerText: "" });
 
-    handleEqualsInput(mockEvent);
+    handleEqualsInput();
     expect(calculatorState).toEqual(expectedState);
 });
 
