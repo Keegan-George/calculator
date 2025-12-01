@@ -115,6 +115,10 @@ function handleEqualsInput() {
  * Handles decimal point input on current number.
  */
 function handleDecimalInput() {
+    if (calculatorState.isEqualsPressed) {
+        resetCalculatorState();
+    }
+
     if (!calculatorState.currentNumber.includes(".")) {
         if (calculatorState.currentNumber === "") {
             calculatorState.currentNumber = "0.";

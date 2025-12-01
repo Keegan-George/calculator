@@ -285,8 +285,6 @@ describe("Evaluate expression", () => {
 
 });
 
-
-
 describe("Decimal input", () => {
     test("Creates decimal in initial state", () => {
         const expectedState = {
@@ -332,6 +330,24 @@ describe("Decimal input", () => {
         expect(calculatorState).toEqual(expectedState);
     });
 
+    test("Decimal after result with equals", () => {
+        const expectedState = {
+            operator: "",
+            currentNumber: "0.",
+            expression: [],
+            result: DEFAULT_RESULT,
+            isEqualsPressed: false,
+        }
+
+        calculatorState.operator = "+";
+        calculatorState.currentNumber = "41",
+        calculatorState.expression = [];
+        calculatorState.result = "41";
+        calculatorState.isEqualsPressed = true;
+
+        handleDecimalInput();
+        expect(calculatorState).toEqual(expectedState);
+    });
 });
 
 describe("Backspace input", () => {
@@ -359,7 +375,7 @@ describe("Backspace input", () => {
             isEqualsPressed: false,
         }
 
-        calculatorState.currentNumber = "246"
+        calculatorState.currentNumber = "246";
 
         handleBackspaceInput();
         expect(calculatorState).toEqual(expectedState);
@@ -379,7 +395,17 @@ describe("Backspace input", () => {
         handleBackspaceInput();
         expect(calculatorState).toEqual(expectedState);
     });
+
+    test("Backspace on initial state", () => {
+        const expectedState = {
+            operator: "",
+            currentNumber: "",
+            expression: [],
+            result: DEFAULT_RESULT,
+            isEqualsPressed: false,
+        }
+
+        handleBackspaceInput();
+        expect(calculatorState).toEqual(expectedState);
+    });
 });
-
-
-
