@@ -68,22 +68,22 @@ describe("evaluteExpression", () => {
 
 describe("isInvalidResult", () => {
     test("Numeric result is valid", () => {
-        result = 5;
+        const result = 5;
         expect(isInvalidResult(result)).toBe(false);
     });
 
     test("Numeric string result is valid", () => {
-        result = "5";
+        const result = "5";
         expect(isInvalidResult(result)).toBe(false);
     });
 
     test("Infinity is invalid", () => {
-        result = Infinity;
+        const result = Infinity;
         expect(isInvalidResult(result)).toBe(true);
     });
 
     test("NaN is invalid", () => {
-        result = NaN;
+        const result = NaN;
         expect(isInvalidResult(result)).toBe(true);
     });
 });
