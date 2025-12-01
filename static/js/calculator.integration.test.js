@@ -372,3 +372,36 @@ test("Can delete a decimal", () => {
     expect(calculatorState).toEqual(expectedState);
 });
 
+test("Can delete a digit", () => {
+    const expectedState = {
+        operator: "",
+        currentNumber: "24",
+        expression: [],
+        result: DEFAULT_RESULT,
+        isEqualsPressed: false,
+    }
+
+    calculatorState.currentNumber = "246"
+
+    document.querySelector = () => ({ innerText: "" });
+
+    handleBackspaceInput();
+    expect(calculatorState).toEqual(expectedState);
+});
+
+test("Delete a single-digit number clears current number field", () => {
+    const expectedState = {
+        operator: "",
+        currentNumber: "",
+        expression: [],
+        result: DEFAULT_RESULT,
+        isEqualsPressed: false,
+    }
+
+    calculatorState.currentNumber = "2";
+
+    document.querySelector = () => ({ innerText: "" });
+
+    handleBackspaceInput();
+    expect(calculatorState).toEqual(expectedState);
+});
