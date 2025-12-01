@@ -9,7 +9,6 @@ const DEFAULT_RESULT = "0";
 const ERROR_MESSAGE = "E R R O R";
 
 const calculatorState = {
-    operator: "",
     currentNumber: "",
     expression: [],
     result: DEFAULT_RESULT,
@@ -22,7 +21,6 @@ const calculatorState = {
 function resetCalculatorState() {
     calculatorState.currentNumber = "";
     calculatorState.result = DEFAULT_RESULT;
-    calculatorState.operator = "";
     calculatorState.expression = [];
     calculatorState.isEqualsPressed = false;
 }
@@ -51,10 +49,10 @@ function handleOperatorInput(event) {
         calculatorState.isEqualsPressed = false;
     }
 
-    calculatorState.operator = extractEventInput(event);
+    let operator = extractEventInput(event);
 
-    if (calculatorState.operator === "x") {
-        calculatorState.operator = "*";
+    if (operator === "x") {
+        operator = "*";
     }
 
     if (calculatorState.currentNumber) {
@@ -76,12 +74,12 @@ function handleOperatorInput(event) {
             }
         }
 
-        calculatorState.expression.push(calculatorState.operator);
+        calculatorState.expression.push(operator);
         calculatorState.currentNumber = "";
     }
 
     else if (calculatorState.expression.length === 2) {
-        calculatorState.expression[1] = calculatorState.operator;
+        calculatorState.expression[1] = operator;
     }
 }
 
