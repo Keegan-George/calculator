@@ -1,109 +1,109 @@
 import { operate, round } from "../math-utils.js";
 
 describe("addition operator", () => {
-    test("Adds two integers", () => {
+    test("Adds integers", () => {
         expect(operate("+", 1, 2)).toBe(3);
     });
 
-    test("Add two large integers", () => {
+    test("Adds large integers", () => {
         expect(operate("+", 99999999, 99999999)).toBe(199_999_998);
     });
 
-    test("Add two floating-point numbers", () => {
+    test("Adds floats", () => {
         expect(operate("+", 0.1, 0.2)).toBeCloseTo(0.3);
     });
 
-    test("Add an integer and a floating-point number", () => {
+    test("Adds int and float", () => {
         expect(operate("+", 1, 0.2)).toBeCloseTo(1.2);
     });
 
-    test("Add zero and an integer", () => {
+    test("Adds zero and int", () => {
         expect(operate("+", 0, 1)).toBe(1);
     });
 
-    test("Add zero and a floating-point number", () => {
+    test("Adds zero and float", () => {
         expect(operate("+", 0, 0.1)).toBeCloseTo(0.1);
     });
 });
 
 describe("subtract operator", () => {
-    test("Subtract two integers", () => {
+    test("Subtracts integers", () => {
         expect(operate("-", 3, 1)).toBe(2);
     });
 
-    test("Subtract a larger integer from a smaller integer returns a negative integer", () => {
+    test("Subtracts larger int from smaller", () => {
         expect(operate("-", 1, 3)).toBe(-2);
     });
 
-    test("Subtract two floating-point numbers", () => {
+    test("Subtracts floats", () => {
         expect(operate("-", 0.3, 0.1)).toBeCloseTo(0.2);
     });
 
-    test("Subtract a larger floating-point number from a smaller one returns a negative floating-point number", () => {
+    test("Subtracts larger float from smaller", () => {
         expect(operate("-", 0.1, 0.3)).toBeCloseTo(-0.2);
     });
 
-    test("Subtract zero from an integer", () => {
+    test("Subtracts zero from int", () => {
         expect(operate("-", 1, 0)).toBe(1);
     });
 
-    test("Subtract an integer from zero", () => {
+    test("Subtracts int from zero", () => {
         expect(operate("-", 0, 1)).toBe(-1);
     });
 
-    test("Subtract zero from a floating-point number", () => {
+    test("Subtracts zero from float", () => {
         expect(operate("-", 0.2, 0)).toBeCloseTo(0.2);
     });
 
-    test("Subtract a floating-point number from zero", () => {
+    test("Subtracts float from zero", () => {
         expect(operate("-", 0, 0.2)).toBeCloseTo(-0.2);
     });
 });
 
 describe("Multiply operator", () => {
-    test("Multiply two integers", () => {
+    test("Multiplies integers", () => {
         expect(operate("*", 2, 3)).toBe(6);
     });
 
-    test("Multiply two large integers", () => {
+    test("Multiplies large integers", () => {
         expect(operate("*", 999999999, 999999999)).toBe(999_999_998_000_000_000);
     });
 
-    test("Multiply two floating-point numbers", () => {
+    test("Multiplies floats", () => {
         expect(operate("*", 0.2, 0.3)).toBeCloseTo(0.06);
     });
 
-    test("Multiply two floating-point numbers with many decimal places", () => {
+    test("Multiplies floats with many decimals", () => {
         expect(operate("*", 0.999999999, 0.999999999)).toBeCloseTo(0.999_999_998);
     });
 
-    test("Multiply zero and a number", () => {
+    test("Multiplies zero and int", () => {
         expect(operate("*", 0, 2)).toBe(0);
     });
 
-    test("Multiply zero and zero", () => {
+    test("Multiplies zero and zero", () => {
         expect(operate("*", 0, 0)).toBe(0);
     });
 });
 
 describe("Divide operator", () => {
-    test("Divide two integers", () => {
+    test("Divides integers", () => {
         expect(operate("/", 6, 3)).toBe(2);
     });
 
-    test("Divide two floating-point numbers resulting in an integer", () => {
+    test("Divides floats to integer", () => {
         expect(operate("/", 0.6, 0.3)).toBe(2);
     });
 
-    test("Divide two floating-point numbers resulting in a floating-point number", () => {
+    test("Divides floats to float", () => {
         expect(operate("/", 0.3, 0.5)).toBeCloseTo(0.6);
     });
 
-    test("Result of division should be rounded to at most 11 decimal places", () => {
+    test("Division result rounded to 11 decimal places", () => {
         expect(operate("/", 0.7, 0.3)).toBeCloseTo(2.33333333333);
     });
 
-    test("Zero divided by a number", () => {
+    test("Zero divided by int", () => {
         expect(operate("/", 0, 3)).toBe(0);
     });
 
@@ -111,25 +111,25 @@ describe("Divide operator", () => {
         expect(operate("/", 0, 0)).toBeNaN();
     });
 
-    test("Number divided by zero", () => {
+    test("Int divided by zero", () => {
         expect(operate("/", 1, 0)).toBe(Infinity);
     });
 });
 
 describe("Round function", () => {
-    test("Round a floating-point number to two decimal places", () => {
+    test("Rounds float to 2 decimals", () => {
         expect(round(1.2345678910, 2)).toBeCloseTo(1.23);
     });
 
-    test("Round a floating-point number to zero decimal places", () => {
+    test("Rounds float to 0 decimals", () => {
         expect(round(2.3456789123, 0)).toBe(2);
     });
 
-    test("Round an integer to 11 decimal places", () => {
+    test("Rounds int to 11 decimals", () => {
         expect(round(3, 11)).toBeCloseTo(3.00_000_000_000);
     });
 
-    test("Round an integer to 0 decimal places", () => {
+    test("Rounds int to 0 decimals", () => {
         expect(round(3, 0)).toBe(3);
     });
 });
