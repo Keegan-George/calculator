@@ -1,4 +1,4 @@
-import { isValidExpression, evaluateExpression, isInvalidResult } from "./validation-utils.js";
+import { ARITHMETIC_KEYS, isValidExpression, evaluateExpression, isInvalidResult } from "./validation-utils.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     initializeCalculatorButtons();
@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
 //constants
 const DEFAULT_RESULT = "0";
 const ERROR_MESSAGE = "E R R O R";
-const ARITHMETIC_KEYS = ["+", "-", "*", "/"];
 
 const calculatorState = {
     operator: "",
