@@ -1,6 +1,5 @@
 import { isValidExpression, evaluateExpression, isInvalidResult } from "../validation-utils.js";
 
-
 describe("isValidExpression", () => {
     test("Empty array is invalid", () => {
         const expression = [];
@@ -9,6 +8,16 @@ describe("isValidExpression", () => {
 
     test("Array of empty strings is invalid", () => {
         const expression = ["", "", ""];
+        expect(isValidExpression(expression)).toBe(false);
+    });
+
+    test("Array of whitespace strings is invalid", () => {
+        const expression = [" ", " ", " "];
+        expect(isValidExpression(expression)).toBe(false);
+    });
+
+    test("Array of booleans is invalid", () => {
+        const expression = [true, true, true];
         expect(isValidExpression(expression)).toBe(false);
     });
 
@@ -44,6 +53,11 @@ describe("isValidExpression", () => {
 
     test("Invalid operator is invalid", () => {
         const expression = ["1", "$", "3"];
+        expect(isValidExpression(expression)).toBe(false);
+    });
+
+    test("Non-string operator is invalid", () => {
+        const expression = ["1", null, "3"];
         expect(isValidExpression(expression)).toBe(false);
     });
 
