@@ -2,7 +2,10 @@
 * @jest-environment jsdom
 */
 
-import { DEFAULT_RESULT, calculatorState, handleDigitInput, handleOperatorInput, handleEqualsInput, resetCalculatorState } from "./calculator.js";
+import { DEFAULT_RESULT, calculatorState, handleDigitInput, handleOperatorInput, handleEqualsInput, handleDecimalInput, handleBackspaceInput, resetCalculatorState } from "./calculator.js";
+
+beforeEach(() => { resetCalculatorState() });
+
 
 test("Can reset Calculator from its initial state", () => {
     const expectedState = {
@@ -302,10 +305,70 @@ test("Pressing an operator twice updates the operator", () => {
     expect(calculatorState).toEqual(expectedState);
 });
 
+test("Can create decimal number from calculator in initial state", () => {
+    const expectedState = {
+        operator: "",
+        currentNumber: "0.",
+        expression: [],
+        result: DEFAULT_RESULT,
+        isEqualsPressed: false,
+    }
 
-// pressing equals with a current number
-// pressing equals with a current number and an operator
-// pressing equals on default
-// pressing operator on default
-// pressing operator twice updates
-// 
+    document.querySelector = () => ({ innerText: "" });
+
+    handleDecimalInput();
+    expect(calculatorState).toEqual(expectedState);
+});
+
+
+test("Can append a decimal after a digit has been entered", () => {
+    const expectedState = {
+        operator: "",
+        currentNumber: "3.",
+        expression: [],
+        result: DEFAULT_RESULT,
+        isEqualsPressed: false,
+    }
+
+    calculatorState.currentNumber = "3"
+
+    document.querySelector = () => ({ innerText: "" });
+
+    handleDecimalInput();
+    expect(calculatorState).toEqual(expectedState);
+});
+
+test("Number can only contain at most one decimal", () => {
+    const expectedState = {
+        operator: "",
+        currentNumber: "3.",
+        expression: [],
+        result: DEFAULT_RESULT,
+        isEqualsPressed: false,
+    }
+
+    calculatorState.currentNumber = "3."
+
+    document.querySelector = () => ({ innerText: "" });
+
+    handleDecimalInput();
+    expect(calculatorState).toEqual(expectedState);
+});
+
+test("Can delete a decimal", () => {
+    const expectedState = {
+        operator: "",
+        currentNumber: "3",
+        expression: [],
+        result: DEFAULT_RESULT,
+        isEqualsPressed: false,
+    }
+
+    calculatorState.currentNumber = "3."
+
+    document.querySelector = () => ({ innerText: "" });
+
+    handleBackspaceInput();
+    expect(calculatorState).toEqual(expectedState);
+});
+

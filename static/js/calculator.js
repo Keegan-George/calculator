@@ -262,4 +262,4 @@ function isInvalidResult(result) {
     return isNaN(result) || !isFinite(result);
 }
 
-export { DEFAULT_RESULT, calculatorState, resetCalculatorState, handleDigitInput, handleOperatorInput, handleEqualsInput };
+export { DEFAULT_RESULT, calculatorState, resetCalculatorState, handleDigitInput, handleOperatorInput, handleEqualsInput, handleDecimalInput, handleBackspaceInput };
