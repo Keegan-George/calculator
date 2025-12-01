@@ -49,3 +49,33 @@ test("A properly formated expression evaluates as valid", () => {
     const expression = ["1", "+", "3"];
     expect(isValidExpression(expression)).toBe(true);
 });
+
+test("Can evaluate an expression", () => {
+    const expression = ["1", "+", "3"];
+    expect(evaluateExpression(expression)).toBe(4);
+});
+
+test("Can evaluate an expression with numeric values", () => {
+    const expression = [1, "+", 3];
+    expect(evaluateExpression(expression)).toBe(4);
+});
+
+test("A numeric result is not invalid", () => {
+    result = 5;
+    expect(isInvalidResult(result)).toBe(false);
+});
+
+test("A numeric string result is not invalid", () => {
+    result = "5";
+    expect(isInvalidResult(result)).toBe(false);
+});
+
+test("Infinity is an invalid result", () => {
+    result = Infinity;
+    expect(isInvalidResult(result)).toBe(true);
+});
+
+test("NaN is an invalid result", () => {
+    result = NaN;
+    expect(isInvalidResult(result)).toBe(true);
+});
