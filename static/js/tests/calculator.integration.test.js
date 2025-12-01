@@ -4,7 +4,10 @@
 
 import { DEFAULT_RESULT, calculatorState, handleDigitInput, handleOperatorInput, handleEqualsInput, handleDecimalInput, handleBackspaceInput, resetCalculatorState } from "../calculator.js";
 
-beforeEach(() => { resetCalculatorState() });
+beforeEach(() => { 
+    resetCalculatorState();
+    document.querySelector = () => ({ innerText: "" });
+});
 
 describe("Reset state", () => {
     test("Resets from initial state", () => {
@@ -58,8 +61,6 @@ describe("Digit input", () => {
             isEqualsPressed: false,
         }
 
-        document.querySelector = () => ({ innerText: "" });
-
         handleDigitInput(mockEvent);
         expect(calculatorState).toEqual(expectedState);
     });
@@ -84,8 +85,6 @@ describe("Digit input", () => {
         calculatorState.currentNumber = "3";
         calculatorState.expression = [];
         calculatorState.isEqualsPressed = false;
-
-        document.querySelector = () => ({ innerText: "" });
 
         handleDigitInput(mockEvent);
         expect(calculatorState).toEqual(expectedState);
@@ -112,8 +111,6 @@ describe("Digit input", () => {
         calculatorState.expression = ["35", "+"];
         calculatorState.isEqualsPressed = false;
 
-        document.querySelector = () => ({ innerText: "" });
-
         handleDigitInput(mockEvent);
         expect(calculatorState).toEqual(expectedState);
     });
@@ -139,8 +136,6 @@ describe("Digit input", () => {
         calculatorState.expression = [];
         calculatorState.result = "41";
         calculatorState.isEqualsPressed = true;
-
-        document.querySelector = () => ({ innerText: "" });
 
         handleDigitInput(mockEvent);
         expect(calculatorState).toEqual(expectedState);
@@ -171,8 +166,6 @@ describe("Operator input", () => {
         calculatorState.expression = [];
         calculatorState.isEqualsPressed = false;
 
-        document.querySelector = () => ({ innerText: "" });
-
         handleOperatorInput(mockEvent);
         expect(calculatorState).toEqual(expectedState);
     });
@@ -199,8 +192,6 @@ describe("Operator input", () => {
         calculatorState.result = "41";
         calculatorState.isEqualsPressed = true;
 
-        document.querySelector = () => ({ innerText: "" });
-
         handleOperatorInput(mockEvent);
         expect(calculatorState).toEqual(expectedState);
     });
@@ -225,8 +216,6 @@ describe("Operator input", () => {
         calculatorState.currentNumber = "";
         calculatorState.expression = ["8", "+"];
 
-        document.querySelector = () => ({ innerText: "" });
-
         handleOperatorInput(mockEvent);
         expect(calculatorState).toEqual(expectedState);
     });
@@ -247,8 +236,6 @@ describe("Evaluate expression", () => {
         calculatorState.currentNumber = "6";
         calculatorState.expression = ["35", "+"];
         calculatorState.isEqualsPressed = false;
-
-        document.querySelector = () => ({ innerText: "" });
 
         handleEqualsInput();
         expect(calculatorState).toEqual(expectedState)
@@ -275,8 +262,6 @@ describe("Evaluate expression", () => {
         calculatorState.expression = ["35", "+"];
         calculatorState.isEqualsPressed = false;
 
-        document.querySelector = () => ({ innerText: "" });
-
         handleOperatorInput(mockEvent);
         expect(calculatorState).toEqual(expectedState);
     });
@@ -293,8 +278,6 @@ describe("Evaluate expression", () => {
         calculatorState.operator = "/";
         calculatorState.currentNumber = "0";
         calculatorState.expression = ["5", "/"];
-
-        document.querySelector = () => ({ innerText: "" });
 
         handleEqualsInput();
         expect(calculatorState).toEqual(expectedState);
@@ -314,8 +297,6 @@ describe("Decimal input", () => {
             isEqualsPressed: false,
         }
 
-        document.querySelector = () => ({ innerText: "" });
-
         handleDecimalInput();
         expect(calculatorState).toEqual(expectedState);
     });
@@ -332,8 +313,6 @@ describe("Decimal input", () => {
 
         calculatorState.currentNumber = "3"
 
-        document.querySelector = () => ({ innerText: "" });
-
         handleDecimalInput();
         expect(calculatorState).toEqual(expectedState);
     });
@@ -348,8 +327,6 @@ describe("Decimal input", () => {
         }
 
         calculatorState.currentNumber = "3."
-
-        document.querySelector = () => ({ innerText: "" });
 
         handleDecimalInput();
         expect(calculatorState).toEqual(expectedState);
@@ -369,8 +346,6 @@ describe("Backspace input", () => {
 
         calculatorState.currentNumber = "3."
 
-        document.querySelector = () => ({ innerText: "" });
-
         handleBackspaceInput();
         expect(calculatorState).toEqual(expectedState);
     });
@@ -386,8 +361,6 @@ describe("Backspace input", () => {
 
         calculatorState.currentNumber = "246"
 
-        document.querySelector = () => ({ innerText: "" });
-
         handleBackspaceInput();
         expect(calculatorState).toEqual(expectedState);
     });
@@ -402,8 +375,6 @@ describe("Backspace input", () => {
         }
 
         calculatorState.currentNumber = "2";
-
-        document.querySelector = () => ({ innerText: "" });
 
         handleBackspaceInput();
         expect(calculatorState).toEqual(expectedState);
