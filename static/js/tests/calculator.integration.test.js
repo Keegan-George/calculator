@@ -7,7 +7,7 @@ import { DEFAULT_RESULT, calculatorState, handleDigitInput, handleOperatorInput,
 beforeEach(() => { resetCalculatorState() });
 
 
-test("Can reset Calculator from its initial state", () => {
+test("Resets from initial state", () => {
     const expectedState = {
         operator: "",
         currentNumber: "",
@@ -20,7 +20,7 @@ test("Can reset Calculator from its initial state", () => {
     expect(calculatorState).toEqual(expectedState);
 });
 
-test("Can reset Calculator after a result has been calculated", () => {
+test("Resets after calculation", () => {
     const expectedState = {
         operator: "",
         currentNumber: "",
@@ -39,7 +39,7 @@ test("Can reset Calculator after a result has been calculated", () => {
     expect(calculatorState).toEqual(expectedState);
 });
 
-test("Can input a digit on a calculator in its initial state", () => {
+test("Inputs digit in initial state", () => {
     const mockEvent = {
         type: "click",
         target: {
@@ -61,7 +61,7 @@ test("Can input a digit on a calculator in its initial state", () => {
     expect(calculatorState).toEqual(expectedState);
 });
 
-test("Can input a digit after one has already been entered", () => {
+test("Inputs digit after one entered", () => {
     const mockEvent = {
         type: "click",
         target: {
@@ -88,7 +88,7 @@ test("Can input a digit after one has already been entered", () => {
     expect(calculatorState).toEqual(expectedState);
 });
 
-test("Can input an operator after a number have been entered", () => {
+test("Inputs operator after number", () => {
     const mockEvent = {
         type: "click",
         target: {
@@ -115,7 +115,7 @@ test("Can input an operator after a number have been entered", () => {
     expect(calculatorState).toEqual(expectedState);
 });
 
-test("Can input a digit after a number and an operator are part of the expression", () => {
+test("Inputs digit after number and operator", () => {
     const mockEvent = {
         type: "click",
         target: {
@@ -142,7 +142,7 @@ test("Can input a digit after a number and an operator are part of the expressio
     expect(calculatorState).toEqual(expectedState);
 });
 
-test("Pressing equals evaluates a valid expression", () => {
+test("Equals evaluates expression", () => {
     const expectedState = {
         operator: "+",
         currentNumber: "41",
@@ -162,7 +162,7 @@ test("Pressing equals evaluates a valid expression", () => {
     expect(calculatorState).toEqual(expectedState)
 });
 
-test("Pressing an operator evaluates a valid expression", () => {
+test("Operator evaluates expression", () => {
     const mockEvent = {
         type: "click",
         target: {
@@ -189,7 +189,7 @@ test("Pressing an operator evaluates a valid expression", () => {
     expect(calculatorState).toEqual(expectedState);
 });
 
-test("Pressing a digit after calculating an expression with the equals button starts a new expression", () => {
+test("Digit after equals starts new expression", () => {
     const mockEvent = {
         type: "click",
         target: {
@@ -217,7 +217,7 @@ test("Pressing a digit after calculating an expression with the equals button st
     expect(calculatorState).toEqual(expectedState);
 });
 
-test("Pressing an operator after calculating an expression with the equals button continues the expression", () => {
+test("Operator after equals continues expression", () => {
     const mockEvent = {
         type: "click",
         target: {
@@ -246,7 +246,7 @@ test("Pressing an operator after calculating an expression with the equals butto
 });
 
 
-test("Can handle division by zero", () => {
+test("Handles division by zero", () => {
     const expectedState = {
         operator: "",
         currentNumber: "",
@@ -265,7 +265,7 @@ test("Can handle division by zero", () => {
     expect(calculatorState).toEqual(expectedState);
 });
 
-test("Pressing an operator twice updates the operator", () => {
+test("Operator pressed twice updates operator", () => {
     const mockEvent = {
         type: "click",
         target: {
@@ -291,7 +291,7 @@ test("Pressing an operator twice updates the operator", () => {
     expect(calculatorState).toEqual(expectedState);
 });
 
-test("Can create decimal number from calculator in initial state", () => {
+test("Creates decimal in initial state", () => {
     const expectedState = {
         operator: "",
         currentNumber: "0.",
@@ -307,7 +307,7 @@ test("Can create decimal number from calculator in initial state", () => {
 });
 
 
-test("Can append a decimal after a digit has been entered", () => {
+test("Appends decimal after digit", () => {
     const expectedState = {
         operator: "",
         currentNumber: "3.",
@@ -324,7 +324,7 @@ test("Can append a decimal after a digit has been entered", () => {
     expect(calculatorState).toEqual(expectedState);
 });
 
-test("Number can only contain at most one decimal", () => {
+test("Number allows only one decimal", () => {
     const expectedState = {
         operator: "",
         currentNumber: "3.",
@@ -341,7 +341,7 @@ test("Number can only contain at most one decimal", () => {
     expect(calculatorState).toEqual(expectedState);
 });
 
-test("Can delete a decimal", () => {
+test("Deletes decimal", () => {
     const expectedState = {
         operator: "",
         currentNumber: "3",
@@ -358,7 +358,7 @@ test("Can delete a decimal", () => {
     expect(calculatorState).toEqual(expectedState);
 });
 
-test("Can delete a digit", () => {
+test("Deletes digit", () => {
     const expectedState = {
         operator: "",
         currentNumber: "24",
@@ -375,7 +375,7 @@ test("Can delete a digit", () => {
     expect(calculatorState).toEqual(expectedState);
 });
 
-test("Delete a single-digit number clears current number field", () => {
+test("Deletes single digit clears field", () => {
     const expectedState = {
         operator: "",
         currentNumber: "",
