@@ -4,280 +4,262 @@ test.beforeEach(async ({ page }) => {
   await page.goto("http://localhost:5500");
 });
 
+
+async function press(page, key) {
+  await page.getByRole("button", { name: key }).click();
+}
+
+async function expectScreen(page, value) {
+  const screen = page.locator(".screen");
+  await expect(screen).toContainText(value);
+}
+
 test("has title", async ({ page }) => {
   await expect(page).toHaveTitle("Calculator");
 });
 
 test("add numbers", async ({ page }) => {
-  const screen = page.locator(".screen");
+  await press(page, "3");
+  await expectScreen(page, "3");
 
-  await page.getByRole("button", { name: "3" }).click();
-  await expect(screen).toContainText("3");
+  await press(page, "+");
 
-  await page.getByRole("button", { name: "+" }).click();
+  await press(page, "2");
+  await expectScreen(page, "2");
 
-  await page.getByRole("button", { name: "2" }).click();
-  await expect(screen).toContainText("2");
+  await press(page, "=");
 
-  await page.getByRole("button", { name: "=" }).click();
-
-  await expect(screen).toContainText("5");
+  await expectScreen(page, "5");
 });
 
 test("subtract numbers", async ({ page }) => {
-  const screen = page.locator(".screen");
+  await press(page, "3");
+  await expectScreen(page, "3");
 
-  await page.getByRole("button", { name: "3" }).click();
-  await expect(screen).toContainText("3");
+  await press(page, "-");
 
-  await page.getByRole("button", { name: "-" }).click();
+  await press(page, "2");
+  await expectScreen(page, "2");
 
-  await page.getByRole("button", { name: "2" }).click();
-  await expect(screen).toContainText("2");
+  await press(page, "=");
 
-  await page.getByRole("button", { name: "=" }).click();
-
-  await expect(screen).toContainText("1");
+  await expectScreen(page, "1");
 });
 
 test("multiply numbers", async ({ page }) => {
-  const screen = page.locator(".screen");
+  await press(page, "3");
+  await expectScreen(page, "3");
 
-  await page.getByRole("button", { name: "3" }).click();
-  await expect(screen).toContainText("3");
+  await press(page, "x");
 
-  await page.getByRole("button", { name: "x" }).click();
+  await press(page, "2");
+  await expectScreen(page, "2");
 
-  await page.getByRole("button", { name: "2" }).click();
-  await expect(screen).toContainText("2");
+  await press(page, "=");
 
-  await page.getByRole("button", { name: "=" }).click();
-
-  await expect(screen).toContainText("6");
+  await expectScreen(page, "6");
 });
 
 test("divide numbers", async ({ page }) => {
-  const screen = page.locator(".screen");
+  await press(page, "6");
+  await expectScreen(page, "6");
 
-  await page.getByRole("button", { name: "6" }).click();
-  await expect(screen).toContainText("6");
+  await press(page, "/");
 
-  await page.getByRole("button", { name: "/" }).click();
+  await press(page, "2");
+  await expectScreen(page, "2");
 
-  await page.getByRole("button", { name: "3" }).click();
-  await expect(screen).toContainText("3");
+  await press(page, "=");
 
-  await page.getByRole("button", { name: "=" }).click();
-
-  await expect(screen).toContainText("2");
+  await expectScreen(page, "3");
 });
 
 test("divide number by 0", async ({ page }) => {
-  const screen = page.locator(".screen");
+  await press(page, "6");
+  await expectScreen(page, "6");
 
-  await page.getByRole("button", { name: "6" }).click();
-  await expect(screen).toContainText("6");
+  await press(page, "/");
 
-  await page.getByRole("button", { name: "/" }).click();
+  await press(page, "0");
+  await expectScreen(page, "0");
 
-  await page.getByRole("button", { name: "0" }).click();
-  await expect(screen).toContainText("0");
+  await press(page, "=");
 
-  await page.getByRole("button", { name: "=" }).click();
-
-  await expect(screen).toContainText("E R R O R");
+  await expectScreen(page, "E R R O R");
 });
 
 
 test("divide 0 by 0", async ({ page }) => {
-  const screen = page.locator(".screen");
+  await press(page, "0");
+  await expectScreen(page, "0");
 
-  await page.getByRole("button", { name: "0" }).click();
-  await expect(screen).toContainText("0");
+  await press(page, "/");
 
-  await page.getByRole("button", { name: "/" }).click();
+  await press(page, "0");
+  await expectScreen(page, "0");
 
-  await page.getByRole("button", { name: "0" }).click();
-  await expect(screen).toContainText("0");
+  await press(page, "=");
 
-  await page.getByRole("button", { name: "=" }).click();
-
-  await expect(screen).toContainText("E R R O R");
+  await expectScreen(page, "E R R O R");
 });
 
 test("new expression after equals", async ({ page }) => {
-  const screen = page.locator(".screen");
-
   //expression 1
-  await page.getByRole("button", { name: "2" }).click();
-  await expect(screen).toContainText("2");
+  await press(page, "2");
+  await expectScreen(page, "2");
 
-  await page.getByRole("button", { name: "+" }).click();
+  await press(page, "+");
 
-  await page.getByRole("button", { name: "3" }).click();
-  await expect(screen).toContainText("3");
+  await press(page, "3");
+  await expectScreen(page, "3");
 
-  await page.getByRole("button", { name: "=" }).click();
+  await press(page, "=");
 
-  await expect(screen).toContainText("5");
+  await expectScreen(page, "5");
 
   //expression 2
-  await page.getByRole("button", { name: "6" }).click();
-  await expect(screen).toContainText("6");
+  await press(page, "6");
+  await expectScreen(page, "6");
 
-  await page.getByRole("button", { name: "x" }).click();
+  await press(page, "x");
 
-  await page.getByRole("button", { name: "2" }).click();
-  await expect(screen).toContainText("2");
+  await press(page, "3");
+  await expectScreen(page, "3");
 
-  await page.getByRole("button", { name: "=" }).click();
+  await press(page, "=");
 
-  await expect(screen).toContainText("12");
-
+  await expectScreen(page, "18");
 });
 
 test("operator continues expression", async ({ page }) => {
-  const screen = page.locator(".screen");
+  //expression 1
+  await press(page, "2");
+  await expectScreen(page, "2");
 
-  //expression
-  await page.getByRole("button", { name: "2" }).click();
-  await expect(screen).toContainText("2");
+  await press(page, "+");
 
-  await page.getByRole("button", { name: "+" }).click();
+  await press(page, "3");
+  await expectScreen(page, "3");
 
-  await page.getByRole("button", { name: "3" }).click();
-  await expect(screen).toContainText("3");
+  await press(page, "=");
 
-  await page.getByRole("button", { name: "=" }).click();
-
-  await expect(screen).toContainText("5");
+  await expectScreen(page, "5");
 
   //continue expression
-  await page.getByRole("button", { name: "x" }).click();
+  await press(page, "x");
 
-  await page.getByRole("button", { name: "2" }).click();
-  await expect(screen).toContainText("2");
+  await press(page, "2");
+  await expectScreen(page, "2");
 
-  await page.getByRole("button", { name: "=" }).click();
+  await press(page, "=");
 
-  await expect(screen).toContainText("10");
+  await expectScreen(page, "10");
 });
 
 test("enter all digits", async ({ page }) => {
-  const screen = page.locator(".screen");
+  await press(page, "9");
+  await expectScreen(page, "9");
 
-  await page.getByRole("button", { name: "9" }).click();
-  await expect(screen).toContainText("9");
+  await press(page, "8");
+  await expectScreen(page, "98");
 
-  await page.getByRole("button", { name: "8" }).click();
-  await expect(screen).toContainText("98");
+  await press(page, "7");
+  await expectScreen(page, "987");
 
-  await page.getByRole("button", { name: "7" }).click();
-  await expect(screen).toContainText("987");
+  await press(page, "6");
+  await expectScreen(page, "9876");
 
-  await page.getByRole("button", { name: "6" }).click();
-  await expect(screen).toContainText("9876");
+  await press(page, "5");
+  await expectScreen(page, "98765");
 
-  await page.getByRole("button", { name: "5" }).click();
-  await expect(screen).toContainText("98765");
+  await press(page, "4");
+  await expectScreen(page, "987654");
 
-  await page.getByRole("button", { name: "4" }).click();
-  await expect(screen).toContainText("987654");
+  await press(page, "3");
+  await expectScreen(page, "9876543");
 
-  await page.getByRole("button", { name: "3" }).click();
-  await expect(screen).toContainText("9876543");
+  await press(page, "2");
+  await expectScreen(page, "98765432");
 
-  await page.getByRole("button", { name: "2" }).click();
-  await expect(screen).toContainText("98765432");
+  await press(page, "1");
+  await expectScreen(page, "987654321");
 
-  await page.getByRole("button", { name: "1" }).click();
-  await expect(screen).toContainText("987654321");
-
-  await page.getByRole("button", { name: "0" }).click();
-  await expect(screen).toContainText("9876543210");
+  await press(page, "0");
+  await expectScreen(page, "9876543210");
 });
 
 test("delete digits", async ({ page }) => {
-  const screen = page.locator(".screen");
+  await press(page, "9");
+  await expectScreen(page, "9");
 
-  await page.getByRole("button", { name: "9" }).click();
-  await expect(screen).toContainText("9");
+  await press(page, "8");
+  await expectScreen(page, "98");
 
-  await page.getByRole("button", { name: "8" }).click();
-  await expect(screen).toContainText("98");
+  await press(page, "7");
+  await expectScreen(page, "987");
 
-  await page.getByRole("button", { name: "7" }).click();
-  await expect(screen).toContainText("987");
+  await press(page, "<");
+  await expectScreen(page, "98");
 
-  await page.getByRole("button", { name: "<" }).click();
-  await expect(screen).toContainText("98");
+  await press(page, "<");
+  await expectScreen(page, "9");
 
-  await page.getByRole("button", { name: "<" }).click();
-  await expect(screen).toContainText("9");
-
-  await page.getByRole("button", { name: "<" }).click();
-  await expect(screen).toContainText("0");
+  await press(page, "<");
+  await expectScreen(page, "0");
 });
 
 test("clear digits", async ({ page }) => {
-  const screen = page.locator(".screen");
+  await press(page, "9");
+  await expectScreen(page, "9");
 
-  await page.getByRole("button", { name: "9" }).click();
-  await expect(screen).toContainText("9");
+  await press(page, "8");
+  await expectScreen(page, "98");
 
-  await page.getByRole("button", { name: "8" }).click();
-  await expect(screen).toContainText("98");
+  await press(page, "7");
+  await expectScreen(page, "987");
 
-  await page.getByRole("button", { name: "7" }).click();
-  await expect(screen).toContainText("987");
-
-  await page.getByRole("button", { name: "CE" }).click();
-  await expect(screen).toContainText("0");
+  await press(page, "CE");
+  await expectScreen(page, "0");
 });
 
 test("add floats", async ({ page }) => {
-  const screen = page.locator(".screen");
+  await press(page, "3");
+  await expectScreen(page, "3");
 
-  await page.getByRole("button", { name: "3" }).click();
-  await expect(screen).toContainText("3");
+  await press(page, ".");
+  await expectScreen(page, "3.");
 
-  await page.getByRole("button", { name: "." }).click();
-  await expect(screen).toContainText("3.");
+  await press(page, "8");
+  await expectScreen(page, "3.8");
 
-  await page.getByRole("button", { name: "8" }).click();
-  await expect(screen).toContainText("3.8");
+  await press(page, "+");
 
-  await page.getByRole("button", { name: "+" }).click();
+  await press(page, "2");
+  await expectScreen(page, "2");
 
-  await page.getByRole("button", { name: "2" }).click();
-  await expect(screen).toContainText("2");
+  await press(page, ".");
+  await expectScreen(page, "2.");
 
-  await page.getByRole("button", { name: "." }).click();
-  await expect(screen).toContainText("2.");
+  await press(page, "1");
+  await expectScreen(page, "2.1");
 
-  await page.getByRole("button", { name: "1" }).click();
-  await expect(screen).toContainText("1");
-
-  await page.getByRole("button", { name: "=" }).click();
-
-  await expect(screen).toContainText("5.9");
+  await press(page, "=");
+  await expectScreen(page, "5.9");
 });
 
 test("Number allows only one decimal", async ({ page }) => {
-  const screen = page.locator(".screen");
+  await press(page, "3");
+  await expectScreen(page, "3");
 
-  await page.getByRole("button", { name: "3" }).click();
-  await expect(screen).toContainText("3");
+  await press(page, ".");
+  await expectScreen(page, "3.");
 
-  await page.getByRole("button", { name: "." }).click();
-  await expect(screen).toContainText("3.");
+  await press(page, ".");
+  await expectScreen(page, "3.");
 
-  await page.getByRole("button", { name: "." }).click();
-  await expect(screen).toContainText("3.");
+  await press(page, "<");
+  await expectScreen(page, "3");
 
-  await page.getByRole("button", { name: "<" }).click();
-  await expect(screen).toContainText("3");
-
-  await page.getByRole("button", { name: "." }).click();
-  await expect(screen).toContainText("3.");
+  await press(page, ".");
+  await expectScreen(page, "3.");
 });
