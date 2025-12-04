@@ -4,7 +4,6 @@ test.beforeEach(async ({ page }) => {
   await page.goto("/");
 });
 
-
 async function press(page, key) {
   await page.getByRole("button", { name: key }).click();
 }
@@ -18,89 +17,137 @@ test("has title", async ({ page }) => {
   await expect(page).toHaveTitle("Calculator");
 });
 
-test("add numbers", async ({ page }) => {
-  await press(page, "3");
-  await expectScreen(page, "3");
+test.describe("Arithmetic operations", () => {
+  test("add numbers", async ({ page }) => {
+    await press(page, "3");
+    await expectScreen(page, "3");
 
-  await press(page, "+");
+    await press(page, "+");
 
-  await press(page, "2");
-  await expectScreen(page, "2");
+    await press(page, "2");
+    await expectScreen(page, "2");
 
-  await press(page, "=");
+    await press(page, "=");
 
-  await expectScreen(page, "5");
+    await expectScreen(page, "5");
+  });
+
+  test("subtract numbers", async ({ page }) => {
+    await press(page, "3");
+    await expectScreen(page, "3");
+
+    await press(page, "-");
+
+    await press(page, "2");
+    await expectScreen(page, "2");
+
+    await press(page, "=");
+
+    await expectScreen(page, "1");
+  });
+
+  test("multiply numbers", async ({ page }) => {
+    await press(page, "3");
+    await expectScreen(page, "3");
+
+    await press(page, "x");
+
+    await press(page, "2");
+    await expectScreen(page, "2");
+
+    await press(page, "=");
+
+    await expectScreen(page, "6");
+  });
+
+  test("divide numbers", async ({ page }) => {
+    await press(page, "6");
+    await expectScreen(page, "6");
+
+    await press(page, "/");
+
+    await press(page, "2");
+    await expectScreen(page, "2");
+
+    await press(page, "=");
+
+    await expectScreen(page, "3");
+  });
 });
 
-test("subtract numbers", async ({ page }) => {
-  await press(page, "3");
-  await expectScreen(page, "3");
+test.describe("Decimal handling", () => {
+  test("add floats", async ({ page }) => {
+    await press(page, "3");
+    await expectScreen(page, "3");
 
-  await press(page, "-");
+    await press(page, ".");
+    await expectScreen(page, "3.");
 
-  await press(page, "2");
-  await expectScreen(page, "2");
+    await press(page, "8");
+    await expectScreen(page, "3.8");
 
-  await press(page, "=");
+    await press(page, "+");
 
-  await expectScreen(page, "1");
-});
+    await press(page, "2");
+    await expectScreen(page, "2");
 
-test("multiply numbers", async ({ page }) => {
-  await press(page, "3");
-  await expectScreen(page, "3");
+    await press(page, ".");
+    await expectScreen(page, "2.");
 
-  await press(page, "x");
+    await press(page, "1");
+    await expectScreen(page, "2.1");
 
-  await press(page, "2");
-  await expectScreen(page, "2");
+    await press(page, "=");
+    await expectScreen(page, "5.9");
+  });
 
-  await press(page, "=");
+  test("number allows only one decimal", async ({ page }) => {
+    await press(page, "3");
+    await expectScreen(page, "3");
 
-  await expectScreen(page, "6");
-});
+    await press(page, ".");
+    await expectScreen(page, "3.");
 
-test("divide numbers", async ({ page }) => {
-  await press(page, "6");
-  await expectScreen(page, "6");
+    await press(page, ".");
+    await expectScreen(page, "3.");
 
-  await press(page, "/");
+    await press(page, "<");
+    await expectScreen(page, "3");
 
-  await press(page, "2");
-  await expectScreen(page, "2");
+    await press(page, ".");
+    await expectScreen(page, "3.");
+  });
+})
 
-  await press(page, "=");
+test.describe("Error handling", () => {
+  test("divide number by 0", async ({ page }) => {
+    await press(page, "6");
+    await expectScreen(page, "6");
 
-  await expectScreen(page, "3");
-});
+    await press(page, "/");
 
-test("divide number by 0", async ({ page }) => {
-  await press(page, "6");
-  await expectScreen(page, "6");
+    await press(page, "0");
+    await expectScreen(page, "0");
 
-  await press(page, "/");
+    await press(page, "=");
 
-  await press(page, "0");
-  await expectScreen(page, "0");
-
-  await press(page, "=");
-
-  await expectScreen(page, "E R R O R");
-});
+    await expectScreen(page, "E R R O R");
+  });
 
 
-test("divide 0 by 0", async ({ page }) => {
-  await press(page, "0");
-  await expectScreen(page, "0");
+  test("divide 0 by 0", async ({ page }) => {
+    await press(page, "0");
+    await expectScreen(page, "0");
 
-  await press(page, "/");
+    await press(page, "/");
 
-  await press(page, "0");
-  await expectScreen(page, "0");
+    await press(page, "0");
+    await expectScreen(page, "0");
 
-  await press(page, "=");
+    await press(page, "=");
 
-  await expectScreen(page, "E R R O R");
+    await expectScreen(page, "E R R O R");
+  });
 });
 
 test("new expression after equals", async ({ page }) => {
@@ -132,7 +179,7 @@ test("new expression after equals", async ({ page }) => {
 });
 
 test("operator continues expression", async ({ page }) => {
-  //expression 1
+  //expression
   await press(page, "2");
   await expectScreen(page, "2");
 
@@ -220,46 +267,4 @@ test("clear digits", async ({ page }) => {
 
   await press(page, "CE");
   await expectScreen(page, "0");
-});
-
-test("add floats", async ({ page }) => {
-  await press(page, "3");
-  await expectScreen(page, "3");
-
-  await press(page, ".");
-  await expectScreen(page, "3.");
-
-  await press(page, "8");
-  await expectScreen(page, "3.8");
-
-  await press(page, "+");
-
-  await press(page, "2");
-  await expectScreen(page, "2");
-
-  await press(page, ".");
-  await expectScreen(page, "2.");
-
-  await press(page, "1");
-  await expectScreen(page, "2.1");
-
-  await press(page, "=");
-  await expectScreen(page, "5.9");
-});
-
-test("Number allows only one decimal", async ({ page }) => {
-  await press(page, "3");
-  await expectScreen(page, "3");
-
-  await press(page, ".");
-  await expectScreen(page, "3.");
-
-  await press(page, ".");
-  await expectScreen(page, "3.");
-
-  await press(page, "<");
-  await expectScreen(page, "3");
-
-  await press(page, ".");
-  await expectScreen(page, "3.");
 });
