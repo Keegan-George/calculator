@@ -5,7 +5,7 @@ This is the final project of the [Odin Project's Foundations Course](https://www
 
 Additionally, though not part of the course curriculum, this project includes both Jest and Playwright tests for validating basic functionality, integration, and e2e behaviour. 
 
-# Prerequisites
+## Prerequisites
 * Node.js (>= v22)
 * npm
 
@@ -17,8 +17,12 @@ Additionally, though not part of the course curriculum, this project includes bo
 ## Run
 1. Start the server: npm run start
 2. Open [http://localhost:5500](http://localhost:5500) in your browser
+3. The calculator supports both mouse clicks and keyboard pressses
 
 ## Demo
+![Animated Gif](assets/calculator-demo.gif)
+
+## Live Demo
 A live demo is also available. Try it out here: [Calculator](https://keegan-george.github.io/calculator)
 
 ## Testing
@@ -31,3 +35,6 @@ npm run test:e2e
 
 ### Run all tests
 npm test
+
+## Test Results
+![Test Results](assets/test-results.PNG)
